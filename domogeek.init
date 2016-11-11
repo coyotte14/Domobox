@@ -15,7 +15,7 @@ case "$1" in
   stop)
 	/home/pi/domogeek/api-domogeek-master/apidomogeek.py stop
 	;;
-  stop|reload|restart|force-reload|status)
+  reload|restart|force-reload|status)
         ;;
   *)
         echo "Usage: $N {start|stop|restart|force-reload|status}" >&2
