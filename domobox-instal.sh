@@ -646,7 +646,7 @@ if [ $skip -eq 0 ]; then
 	cd
     wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/air.tgz
     sudo tar xfz air.tgz -C /var/www/html
-    sudo chown -R www-data:www-data /var/www.html/air
+    sudo chown -R www-data:www-data /var/www/html/air
     sudo crontab /var/www.html/air/air.crontab
 	cd
 	task_end
