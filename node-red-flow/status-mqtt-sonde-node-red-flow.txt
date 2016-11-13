@@ -1,0 +1,368 @@
+[
+    {
+        "id": "ae6500ff.2509e",
+        "type": "tab",
+        "label": "Status_Sonde"
+    },
+    {
+        "id": "a127fa8d.df2c4",
+        "type": "comment",
+        "z": "ae6500ff.2509e",
+        "name": "Status sonde sur topic /+/status",
+        "info": "",
+        "x": 138.5,
+        "y": 37,
+        "wires": []
+    },
+    {
+        "id": "795337b4.49cfc",
+        "type": "mqtt in",
+        "z": "ae6500ff.2509e",
+        "name": "Status /+/status",
+        "topic": "/+/status",
+        "qos": "0",
+        "broker": "fe3ccd54.47756",
+        "x": 85.5,
+        "y": 128,
+        "wires": [
+            [
+                "953826ad.1a955",
+                "e7a518b.5027d68"
+            ]
+        ]
+    },
+    {
+        "id": "953826ad.1a955",
+        "type": "debug",
+        "z": "ae6500ff.2509e",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 199,
+        "y": 214,
+        "wires": []
+    },
+    {
+        "id": "f2c59771.62e58",
+        "type": "adv ping",
+        "z": "ae6500ff.2509e",
+        "name": "ping sonde",
+        "host": "",
+        "x": 492.5,
+        "y": 130,
+        "wires": [
+            [
+                "f33ae9f3.c11be8",
+                "a810de11.a6004"
+            ]
+        ]
+    },
+    {
+        "id": "f33ae9f3.c11be8",
+        "type": "debug",
+        "z": "ae6500ff.2509e",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 476,
+        "y": 209,
+        "wires": []
+    },
+    {
+        "id": "e7a518b.5027d68",
+        "type": "function",
+        "z": "ae6500ff.2509e",
+        "name": "hostname sonde",
+        "func": "var dataStr = msg.payload;\n\n//if individual node selected - the destination id should be last part of topic\n\n//split msg by /\nvar tokens = msg.topic.split(\"/\");\n\ncontext.sysname = tokens[1];\nmsg.host = context.sysname;\n    node.status({text:msg.host});\n    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 288.5,
+        "y": 129,
+        "wires": [
+            [
+                "f2c59771.62e58"
+            ]
+        ]
+    },
+    {
+        "id": "a810de11.a6004",
+        "type": "switch",
+        "z": "ae6500ff.2509e",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 676,
+        "y": 130,
+        "wires": [
+            [
+                "d067c85d.f37888"
+            ],
+            [
+                "10c250e2.c98da7"
+            ]
+        ]
+    },
+    {
+        "id": "d4068141.11006",
+        "type": "comment",
+        "z": "ae6500ff.2509e",
+        "name": "ping KO",
+        "info": "",
+        "x": 679,
+        "y": 83,
+        "wires": []
+    },
+    {
+        "id": "4202ddf2.63d7dc",
+        "type": "comment",
+        "z": "ae6500ff.2509e",
+        "name": "Anti-Spam",
+        "info": "",
+        "x": 949,
+        "y": 84,
+        "wires": []
+    },
+    {
+        "id": "d067c85d.f37888",
+        "type": "delay",
+        "z": "ae6500ff.2509e",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "1",
+        "timeoutUnits": "hours",
+        "rate": "5",
+        "rateUnits": "hour",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 831,
+        "y": 130,
+        "wires": [
+            [
+                "73ddf54d.e1c224"
+            ]
+        ]
+    },
+    {
+        "id": "73ddf54d.e1c224",
+        "type": "delay",
+        "z": "ae6500ff.2509e",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "4",
+        "timeoutUnits": "seconds",
+        "rate": "10",
+        "rateUnits": "day",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 1022,
+        "y": 130,
+        "wires": [
+            [
+                "8e54d72b.e65b9"
+            ]
+        ]
+    },
+    {
+        "id": "8e54d72b.e65b9",
+        "type": "template",
+        "z": "ae6500ff.2509e",
+        "name": "Ping message",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Serveur {{topic}} indisponible ! ",
+        "x": 1198,
+        "y": 130,
+        "wires": [
+            [
+                "f111d795.5db3d8",
+                "5aab1322.e02d24"
+            ]
+        ]
+    },
+    {
+        "id": "3737f0db.10429",
+        "type": "comment",
+        "z": "ae6500ff.2509e",
+        "name": "Construction du message",
+        "info": "",
+        "x": 1214,
+        "y": 34,
+        "wires": []
+    },
+    {
+        "id": "73a98506.4432ec",
+        "type": "comment",
+        "z": "ae6500ff.2509e",
+        "name": "Transmission",
+        "info": "",
+        "x": 1376,
+        "y": 82,
+        "wires": []
+    },
+    {
+        "id": "f111d795.5db3d8",
+        "type": "e-mail",
+        "z": "ae6500ff.2509e",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "name": "coyotte14@gmail.com",
+        "dname": "Email Alert",
+        "x": 1374,
+        "y": 131,
+        "wires": []
+    },
+    {
+        "id": "b5d7f5b6.de5ff",
+        "type": "comment",
+        "z": "ae6500ff.2509e",
+        "name": "Hostname Sonde",
+        "info": "",
+        "x": 286,
+        "y": 83,
+        "wires": []
+    },
+    {
+        "id": "fbbf4862.f528f8",
+        "type": "comment",
+        "z": "ae6500ff.2509e",
+        "name": "ping Hostname Sonde",
+        "info": "",
+        "x": 506,
+        "y": 37,
+        "wires": []
+    },
+    {
+        "id": "5f87dc8b.0df38c",
+        "type": "comment",
+        "z": "ae6500ff.2509e",
+        "name": "ping OK",
+        "info": "",
+        "x": 663,
+        "y": 256,
+        "wires": []
+    },
+    {
+        "id": "10c250e2.c98da7",
+        "type": "delay",
+        "z": "ae6500ff.2509e",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "1",
+        "timeoutUnits": "hours",
+        "rate": "5",
+        "rateUnits": "hour",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 826,
+        "y": 253,
+        "wires": [
+            [
+                "15bdb642.de2d3a"
+            ]
+        ]
+    },
+    {
+        "id": "15bdb642.de2d3a",
+        "type": "delay",
+        "z": "ae6500ff.2509e",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "4",
+        "timeoutUnits": "seconds",
+        "rate": "10",
+        "rateUnits": "day",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 1017,
+        "y": 253,
+        "wires": [
+            [
+                "75ab68ea.7cd2e"
+            ]
+        ]
+    },
+    {
+        "id": "75ab68ea.7cd2e",
+        "type": "template",
+        "z": "ae6500ff.2509e",
+        "name": "Ping message",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Serveur {{topic}} connexion MQTT indisponible ! ",
+        "x": 1193,
+        "y": 253,
+        "wires": [
+            [
+                "f111d795.5db3d8",
+                "5aab1322.e02d24"
+            ]
+        ]
+    },
+    {
+        "id": "5aab1322.e02d24",
+        "type": "debug",
+        "z": "ae6500ff.2509e",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 1403,
+        "y": 187,
+        "wires": []
+    },
+    {
+        "id": "ffe23a67.473cc8",
+        "type": "comment",
+        "z": "ae6500ff.2509e",
+        "name": "Test MQTT indisponible",
+        "info": "mosquitto_pub -t /T-Veranda/status -m \"7\"\nmosquitto_pub -t /T-Salon/status -m \"hs\"\nmosquitto_pub -t /P-Garage1/status -m \"ok\"",
+        "x": 107,
+        "y": 265,
+        "wires": []
+    },
+    {
+        "id": "fe3ccd54.47756",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "192.168.1.30",
+        "port": "1883",
+        "tls": null,
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "15",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": ""
+    }
+]
