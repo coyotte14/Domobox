@@ -593,7 +593,8 @@ fi
 # Drop in an index file and css for a menu page
 task_start "Add index/link page and a little css?" "Adding index.html and a little css"
 if [ $skip -eq 0 ]; then
-	sudo wget -qq http://www.scargill.net/iot/index.html -O /var/www/html/index.html
+	#sudo wget -qq http://www.scargill.net/iot/index.html -O /var/www/html/index.html
+	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/index.html -O /var/www/html/index.html
 	sudo wget -qq http://www.scargill.net/iot/reset.css -O /var/www/html/reset.css
 	task_end
 fi
@@ -651,6 +652,18 @@ if [ $skip -eq 0 ]; then
 	cd
 	task_end
 fi
+
+task_start "Install NetData?" "Installing NetData"
+if [ $skip -eq 0 ]; then
+	cd
+	sudo apt-get install  uuid-dev libmnl-dev autoconf autoconf-archive autogen automake -y
+	git clone https://github.com/firehol/netdata.git --depth=1
+	cd netdata
+	sudo ./netdata-installer.sh --dont-wait
+	cd
+	task_end
+fi
+
 # HP Modif End
 
 # Something I did wrong here meant the FriendlyArm Nanopi M1 came up with no graphical interface.  sudo apt-get-install xorg fixed that followed by xstart
