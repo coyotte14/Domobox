@@ -20,7 +20,7 @@ Installation de SQLlite + SQLlite manager : http://domobox/phpliteadmin
 Installation de la page Web PhpSysInfo, pour d'afficher des informations concernant le système et le matériel : http://domobox/phpsysinfo
 
 Ressources :
-Installation du script "Qualité de l'air" : voir
+Installation du script "Qualité de l'air" : voir http://www.domo-blog.fr/lindice-de-pollution-de-lair-dans-votre-eedomus/
 Installation de l'API Domogeek en local : voir http://domogeek.entropialux.com/static/index.html
 Installation du script "Précipitation dans l'heure" : voir 
 Mise à disposition de flow Node-Red : https://github.com/coyotte14/Domobox/edit/master/
