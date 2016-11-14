@@ -1,4 +1,13 @@
 # Domobox
+
+Installation Domobox :
+Sur Raspberry 3 en Rasbian :
+sudo apt-get update
+Se connecter sur le compte pi
+Dans le répertoire Home pi (/home/pi) :
+ chmod +x
+ ./
+
 Installation du serveur Web  Apache port http://domobox:80, page d'accueil avec accès aux logiciels disponibles sur Domobox
 Installation du broker MQTT Mosquitto port 1883
 Installation de Node-Red, environnement de développement visuel pour l’Internet des Objets. 
