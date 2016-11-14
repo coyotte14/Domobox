@@ -461,6 +461,12 @@ if [ $skip -eq 0 ]; then
 	npm install node-red-dashboard
     npm install node-red-node-darksky
 	sudo npm install bcryptjs
+	# HP Modif
+	sudo npm install -g node-red-admin
+	npm install node-red-contrib-advanced-ping
+	npm install node-red-node-weather-underground
+	npm install node-red-node-forecastio
+	# HP Modif End
 
 	if [ $other -eq 0 ]; then
 		npm install node-red-node-ledborg
