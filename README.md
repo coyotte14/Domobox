@@ -17,7 +17,7 @@ Installation de Node-Red, environnement de développement visuel pour l’Intern
 Installation de l'interface web d'administration linux Webmin : http://domobox:10000
 Installation de Netdata, interface de monitoring performance temps réel
 Installation de SQLlite + SQLlite manager : http://domobox/phpliteadmin
-nstallation de la page Web PhpSysInfo, qui permet d'afficher des informations concernant le système et le matériel : http://domobox/phpsysinfo
+Installation de la page Web PhpSysInfo, pour d'afficher des informations concernant le système et le matériel : http://domobox/phpsysinfo
 
 Ressources :
 Installation du script "Qualité de l'air" : voir
