@@ -1,0 +1,311 @@
+[
+    {
+        "id": "ac43b7a5.a5ef9",
+        "type": "tab",
+        "label": "Eclairage"
+    },
+    {
+        "id": "6a8b142a.52c6fc",
+        "type": "mqtt in",
+        "z": "ac43b7a5.a5ef9",
+        "name": "/R-VMC/gpio/+",
+        "topic": "/R-VMC/gpio/+",
+        "qos": "2",
+        "broker": "9aed70de.28a338",
+        "x": 93,
+        "y": 148.94000244140625,
+        "wires": [
+            [
+                "7b4bf4dc.b4fd84"
+            ]
+        ]
+    },
+    {
+        "id": "7b4bf4dc.b4fd84",
+        "type": "debug",
+        "z": "ac43b7a5.a5ef9",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 279,
+        "y": 148.94000244140625,
+        "wires": []
+    },
+    {
+        "id": "e2760573.8df9e8",
+        "type": "comment",
+        "z": "ac43b7a5.a5ef9",
+        "name": "Eclairage",
+        "info": "",
+        "x": 68.5,
+        "y": 29,
+        "wires": []
+    },
+    {
+        "id": "68c7f0c6.31acc",
+        "type": "comment",
+        "z": "ac43b7a5.a5ef9",
+        "name": "/R-VMC/gpio/+ : Debug Topic /R-VMC/gpio",
+        "info": "",
+        "x": 165,
+        "y": 100.94000244140625,
+        "wires": []
+    },
+    {
+        "id": "7b876c35.bdefd4",
+        "type": "mqtt out",
+        "z": "ac43b7a5.a5ef9",
+        "name": "",
+        "topic": "/R-VMC/gpio/13",
+        "qos": "2",
+        "retain": "",
+        "broker": "9aed70de.28a338",
+        "x": 604,
+        "y": 304.94000244140625,
+        "wires": []
+    },
+    {
+        "id": "50fb6f86.1468f8",
+        "type": "ui_switch",
+        "z": "ac43b7a5.a5ef9",
+        "name": "",
+        "label": "Eclairage",
+        "group": "2bac73d2.fcf2fc",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "topic": "",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 236,
+        "y": 332.94000244140625,
+        "wires": [
+            [
+                "b8666e1d.5a1a98",
+                "95dad03e.538a8"
+            ]
+        ]
+    },
+    {
+        "id": "b8666e1d.5a1a98",
+        "type": "function",
+        "z": "ac43b7a5.a5ef9",
+        "name": "On/Off",
+        "func": "if (msg.payload === true) {\n    msg.payload=\"0\";\n    } \nelse {\n    msg.payload=\"1\";\n    }\n    node.status({text:msg.payload});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 412,
+        "y": 303.94000244140625,
+        "wires": [
+            [
+                "7b876c35.bdefd4"
+            ]
+        ]
+    },
+    {
+        "id": "22f612e2.ae0366",
+        "type": "mqtt out",
+        "z": "ac43b7a5.a5ef9",
+        "name": "",
+        "topic": "/R-VMC/gpio/12",
+        "qos": "",
+        "retain": "",
+        "broker": "9aed70de.28a338",
+        "x": 605,
+        "y": 368,
+        "wires": []
+    },
+    {
+        "id": "119428da.8923b7",
+        "type": "comment",
+        "z": "ac43b7a5.a5ef9",
+        "name": "gpio13 : led",
+        "info": "0 : allumé\n1 : éteint\n",
+        "x": 766,
+        "y": 305,
+        "wires": []
+    },
+    {
+        "id": "6183f2f4.3b2624",
+        "type": "comment",
+        "z": "ac43b7a5.a5ef9",
+        "name": "gpio12 : relay",
+        "info": "0 : éteint\n1 : allumé",
+        "x": 766,
+        "y": 368,
+        "wires": []
+    },
+    {
+        "id": "95dad03e.538a8",
+        "type": "function",
+        "z": "ac43b7a5.a5ef9",
+        "name": "On/Off",
+        "func": "if (msg.payload === true) {\n    msg.payload=\"1\";\n    } \nelse {\n    msg.payload=\"0\";\n    }\n    node.status({text:msg.payload});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 412,
+        "y": 367,
+        "wires": [
+            [
+                "22f612e2.ae0366"
+            ]
+        ]
+    },
+    {
+        "id": "fd0d4bb3.078c38",
+        "type": "mqtt in",
+        "z": "ac43b7a5.a5ef9",
+        "name": "T° salon",
+        "topic": "/T-Salon/DHT/Temperature/#",
+        "qos": "2",
+        "broker": "9aed70de.28a338",
+        "x": 75,
+        "y": 520,
+        "wires": [
+            [
+                "99eb594.76a60a8",
+                "cb806500.3eb4d8"
+            ]
+        ]
+    },
+    {
+        "id": "99eb594.76a60a8",
+        "type": "switch",
+        "z": "ac43b7a5.a5ef9",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "20",
+                "vt": "num"
+            },
+            {
+                "t": "lte",
+                "v": "20",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "outputs": 2,
+        "x": 247,
+        "y": 519,
+        "wires": [
+            [
+                "edf60b2.8bfb4f8"
+            ],
+            [
+                "b069bd18.a0e068"
+            ]
+        ]
+    },
+    {
+        "id": "edf60b2.8bfb4f8",
+        "type": "function",
+        "z": "ac43b7a5.a5ef9",
+        "name": "T°>20 On",
+        "func": "msg.payload=\"1\";\n    node.status({text:msg.payload});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 403,
+        "y": 487,
+        "wires": [
+            [
+                "22f612e2.ae0366"
+            ]
+        ]
+    },
+    {
+        "id": "b069bd18.a0e068",
+        "type": "function",
+        "z": "ac43b7a5.a5ef9",
+        "name": "T°<20 Off",
+        "func": "msg.payload=\"0\";\n    node.status({text:msg.payload});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 399,
+        "y": 558,
+        "wires": [
+            [
+                "22f612e2.ae0366"
+            ]
+        ]
+    },
+    {
+        "id": "6b138d6.3138c74",
+        "type": "comment",
+        "z": "ac43b7a5.a5ef9",
+        "name": "Test Allumage sur T° > à 20",
+        "info": "",
+        "x": 125,
+        "y": 458,
+        "wires": []
+    },
+    {
+        "id": "cb806500.3eb4d8",
+        "type": "debug",
+        "z": "ac43b7a5.a5ef9",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 236,
+        "y": 616,
+        "wires": []
+    },
+    {
+        "id": "dbca7b5f.0e5518",
+        "type": "comment",
+        "z": "ac43b7a5.a5ef9",
+        "name": "Commande éclairage salon",
+        "info": "",
+        "x": 128,
+        "y": 286,
+        "wires": []
+    },
+    {
+        "id": "9aed70de.28a338",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "192.168.1.40",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
+        "id": "2bac73d2.fcf2fc",
+        "type": "ui_group",
+        "z": "ac43b7a5.a5ef9",
+        "name": "Bureau",
+        "tab": "2d03b235.d451be",
+        "disp": true,
+        "width": "4"
+    },
+    {
+        "id": "2d03b235.d451be",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Eclairage",
+        "icon": "dashboard",
+        "order": 4
+    }
+]

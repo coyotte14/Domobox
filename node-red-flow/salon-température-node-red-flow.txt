@@ -1,0 +1,302 @@
+[
+    {
+        "id": "3eb5b51.da5254a",
+        "type": "tab",
+        "label": "Salon"
+    },
+    {
+        "id": "a88aba07.78ac4",
+        "type": "ui_text",
+        "z": "3eb5b51.da5254a",
+        "group": "a3e71244.3214e8",
+        "order": 6,
+        "width": "",
+        "height": "",
+        "name": "Humidité",
+        "label": "Humidité",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 540,
+        "y": 580.2598876953125,
+        "wires": []
+    },
+    {
+        "id": "2f6d257a.88eee2",
+        "type": "mqtt in",
+        "z": "3eb5b51.da5254a",
+        "name": "Humidité",
+        "topic": "/T-Salon/DHT/Humidity/#",
+        "qos": "2",
+        "broker": "9aed70de.28a338",
+        "x": 105,
+        "y": 583.9799194335938,
+        "wires": [
+            [
+                "a88aba07.78ac4",
+                "31b39c0a.90e7ac"
+            ]
+        ]
+    },
+    {
+        "id": "a093b4d9.6bfc88",
+        "type": "mqtt in",
+        "z": "3eb5b51.da5254a",
+        "name": "Temperature",
+        "topic": "/T-Salon/DHT/Temperature/#",
+        "qos": "2",
+        "broker": "9aed70de.28a338",
+        "x": 104.5,
+        "y": 163.95999145507812,
+        "wires": [
+            [
+                "b34fb937.6fa06",
+                "2cf86030.b37bc",
+                "c6476d47.f74418",
+                "cd7b581b.a2e378",
+                "650416e0.969aa",
+                "96ef3a44.26c0a8"
+            ]
+        ]
+    },
+    {
+        "id": "b34fb937.6fa06",
+        "type": "ui_text",
+        "z": "3eb5b51.da5254a",
+        "group": "a3e71244.3214e8",
+        "order": 2,
+        "width": "",
+        "height": "",
+        "name": "Température",
+        "label": "Température",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 542.5,
+        "y": 167.95997619628906,
+        "wires": []
+    },
+    {
+        "id": "7e272ad0.df9624",
+        "type": "debug",
+        "z": "3eb5b51.da5254a",
+        "name": "",
+        "active": false,
+        "console": "false",
+        "complete": "false",
+        "x": 543,
+        "y": 42,
+        "wires": []
+    },
+    {
+        "id": "2cf86030.b37bc",
+        "type": "function",
+        "z": "3eb5b51.da5254a",
+        "name": "Date",
+        "func": "MaDate = new Date();\ndayString = MaDate.toString();\ntimeString = dayString.substring( 16 , 21 );\nmsg.payload = timeString\n    node.status({text:msg.payload});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 326.5,
+        "y": 104.95999145507812,
+        "wires": [
+            [
+                "4896f140.1a9828",
+                "7e272ad0.df9624"
+            ]
+        ]
+    },
+    {
+        "id": "4896f140.1a9828",
+        "type": "ui_text",
+        "z": "3eb5b51.da5254a",
+        "group": "a3e71244.3214e8",
+        "order": 1,
+        "width": "",
+        "height": "",
+        "name": "Mise à jour",
+        "label": "Mise à jour",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 543.5,
+        "y": 104.95997619628906,
+        "wires": []
+    },
+    {
+        "id": "31b39c0a.90e7ac",
+        "type": "ui_chart",
+        "z": "3eb5b51.da5254a",
+        "name": "Chart-Humidité",
+        "group": "a3e71244.3214e8",
+        "order": 8,
+        "width": "",
+        "height": "",
+        "label": "",
+        "interpolate": "linear",
+        "nodata": "No Data",
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderUnit": "86400",
+        "x": 557.5,
+        "y": 631.9598999023438,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c6476d47.f74418",
+        "type": "ui_chart",
+        "z": "3eb5b51.da5254a",
+        "name": "Chart-Température",
+        "group": "a3e71244.3214e8",
+        "order": 7,
+        "width": "",
+        "height": "",
+        "label": "",
+        "interpolate": "linear",
+        "nodata": "No Data",
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderUnit": "86400",
+        "x": 563,
+        "y": 229.25997924804688,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "945abe56.ada078",
+        "type": "ui_text",
+        "z": "3eb5b51.da5254a",
+        "group": "a3e71244.3214e8",
+        "order": 3,
+        "width": "",
+        "height": "",
+        "name": "T° Max",
+        "label": "Température max",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 533.5,
+        "y": 275.9599914550781,
+        "wires": []
+    },
+    {
+        "id": "3074eb75.c12afc",
+        "type": "ui_text",
+        "z": "3eb5b51.da5254a",
+        "group": "a3e71244.3214e8",
+        "order": 4,
+        "width": "",
+        "height": "",
+        "name": "T° Min",
+        "label": "Température min",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 525.5,
+        "y": 348.9599609375,
+        "wires": []
+    },
+    {
+        "id": "cd7b581b.a2e378",
+        "type": "smooth",
+        "z": "3eb5b51.da5254a",
+        "name": "",
+        "action": "min",
+        "count": "800",
+        "round": false,
+        "x": 331,
+        "y": 349.4100341796875,
+        "wires": [
+            [
+                "3074eb75.c12afc"
+            ]
+        ]
+    },
+    {
+        "id": "650416e0.969aa",
+        "type": "smooth",
+        "z": "3eb5b51.da5254a",
+        "name": "",
+        "action": "max",
+        "count": "800",
+        "round": false,
+        "x": 328,
+        "y": 275.40997314453125,
+        "wires": [
+            [
+                "945abe56.ada078"
+            ]
+        ]
+    },
+    {
+        "id": "96ef3a44.26c0a8",
+        "type": "function",
+        "z": "3eb5b51.da5254a",
+        "name": "Global var temperature",
+        "func": "context.global.myTemperaturesSalon=msg.payload;\nmsg.payload = context.global.myTemperaturesSalon;\n    node.status({text:msg.payload});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 377,
+        "y": 454,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a6bd5587.9262d",
+        "type": "comment",
+        "z": "3eb5b51.da5254a",
+        "name": "Salon: humidité UI",
+        "info": "",
+        "x": 95,
+        "y": 543.9999694824219,
+        "wires": []
+    },
+    {
+        "id": "47a35358.14ceac",
+        "type": "comment",
+        "z": "3eb5b51.da5254a",
+        "name": "Salon: température UI",
+        "info": "",
+        "x": 108,
+        "y": 24,
+        "wires": []
+    },
+    {
+        "id": "a3e71244.3214e8",
+        "type": "ui_group",
+        "z": "3eb5b51.da5254a",
+        "name": "Salon",
+        "tab": "c138cad1.3fc97",
+        "order": 1,
+        "disp": true,
+        "width": "6"
+    },
+    {
+        "id": "9aed70de.28a338",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "192.168.1.40",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    },
+    {
+        "id": "c138cad1.3fc97",
+        "type": "ui_tab",
+        "z": "3eb5b51.da5254a",
+        "name": "Salon",
+        "icon": "dashboard",
+        "order": 2
+    }
+]

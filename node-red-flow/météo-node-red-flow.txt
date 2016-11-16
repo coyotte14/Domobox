@@ -522,9 +522,9 @@
         "type": "comment",
         "z": "34c9abde.736dac",
         "name": "Rain Forecaster",
-        "info": "",
+        "info": "Créer un compte sur \nhttps://developer.forecast.io/\nRenseigner votre clef API dans la module forecast.io",
         "x": 108,
-        "y": 1340,
+        "y": 1381,
         "wires": []
     },
     {
@@ -868,6 +868,46 @@
         "complete": "false",
         "x": 352,
         "y": 1090,
+        "wires": []
+    },
+    {
+        "id": "386c2d7e.070ada",
+        "type": "comment",
+        "z": "34c9abde.736dac",
+        "name": "Openweathermap",
+        "info": "Get key API : \nhttps://home.openweathermap.org/api_keys\nS'enregister pour disposer d'une clef API\nRenseigner cette clef dans le module openweathermap",
+        "x": 125,
+        "y": 145,
+        "wires": []
+    },
+    {
+        "id": "d684683.e230498",
+        "type": "comment",
+        "z": "34c9abde.736dac",
+        "name": "Weather Underground",
+        "info": "Créer un compte sur\nhttps://www.wunderground.com/weather/api/\n\nVoir procédure sur :\nhttps://opensprinkler.freshdesk.com/support/solutions/articles/5000017485-getting-a-weather-api-key\n",
+        "x": 141,
+        "y": 1144,
+        "wires": []
+    },
+    {
+        "id": "14b258a1.88e53f",
+        "type": "comment",
+        "z": "34c9abde.736dac",
+        "name": "Précipitations",
+        "info": "Le site Météo France http://www.meteofrance.com/mf3-rpc-portlet/rest/pluie/[code INSEE]\nutilise le code INSEE de la comune\n\nCode de la ville pour météo :\nhttp://www.insee.fr/fr/methodes/nomenclatures/cog/\nou\nhttp://www.meteofrance.com/mf3-rpc-portlet/rest/lieu/facet/pluie/search/ma_ville_Saint-Contest\n\nExemple pour la ville de Bordeaux, \"id\" : \"330630\", :\nhttp://www.meteofrance.com/mf3-rpc-portlet/rest/lieu/facet/pluie/search/ma_ville_Bordeaux\n\nà St Contest :\nPluie à Saint-Contest,   \"id' : \"145660\", :\nhttp://www.meteofrance.com/mf3-rpc-portlet/rest/pluie/145660\n\nà Caen \"id\" 141180\nhttp://www.meteofrance.com/mf3-rpc-portlet/rest/pluie/141180\n\nou\nhttp://www.meteofrance.com/mf3-rpc-portlet/rest/lieu/facet/pluie/search/ma_ville_Caen\nCode INSEE : \n141180\n\n",
+        "x": 183,
+        "y": 993,
+        "wires": []
+    },
+    {
+        "id": "c58f3c4a.ee3f28",
+        "type": "comment",
+        "z": "34c9abde.736dac",
+        "name": "API Domogeek",
+        "info": "Installée en local sur Domobox\nles requètes cont accessible via en http sur le port 81\n\nTest sur Domobox\ncurl http://192.168.1.40:81/holidayall/A/now\ncurl http://192.168.1.40:81/geolocation/caen\ncurl http://192.168.1.40:81/vigilance/14/all\ncurl http://192.168.1.40:81/geolocation/season\ncurl http://192.168.1.40:81/myip\ncurl http://192.168.1.40:81/ejpedf/ouest/today\ncurl http://192.168.1.40:81/feastedsaint/now\ncurl http://192.168.1.40:81/holiday/now\ncurl http://192.168.1.40:81/holiday/11-11-2015\ncurl http://192.168.1.40:81/schoolholiday/B/now\ncurl http://192.168.1.40:81/schoolholiday/B/now\ncurl http://192.168.1.40:81/sun/caen/all/now\ncurl http://192.168.1.40:81/tempoedf/now\ncurl http://192.168.1.40:81/vigilance/14/color\ncurl http://192.168.1.40:81/vigilance/14/all\ncurl http://192.168.1.40:81/weather/caen/all/today\ncurl http://192.168.1.40:81/weather/caen/rain/today\ncurl http://192.168.1.40:81/weekend/now\n\nTest API en ligne:\ncurl http://domogeek.entropialux.com/holidayall/A/now\ncurl http://domogeek.entropialux.com/geolocation/caen\nhttp://domogeek.entropialux.com/geolocation/saint-contest\ncurl http://domogeek.entropialux.com/vigilance/14/all\ncurl http://domogeek.entropialux.com/season\ncurl http://domogeek.entropialux.com/myip\ncurl http://domogeek.entropialux.com/ejpedf/ouest/today\ncurl http://domogeek.entropialux.com/feastedsaint/now\ncurl http://domogeek.entropialux.com/holiday/11-11-2015\ncurl http://domogeek.entropialux.com/schoolholiday/B/all\ncurl http://domogeek.entropialux.com/schoolholiday/B/now\ncurl http://domogeek.entropialux.com/sun/caen/all/now\ncurl http://domogeek.entropialux.com/tempoedf/now\ncurl http://domogeek.entropialux.com/vigilance/14/color\ncurl http://domogeek.entropialux.com/vigilance/14/all\ncurl http://domogeek.entropialux.com/weather/caen/all/today\ncurl http://localhost:81/weather/caen/rain/today\ncurl http://domogeek.entropialux.com/weekend/now\n",
+        "x": 211,
+        "y": 889,
         "wires": []
     },
     {

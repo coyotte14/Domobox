@@ -1,13 +1,13 @@
 [
     {
-        "id": "ae6500ff.2509e",
+        "id": "db311664.5b79e",
         "type": "tab",
         "label": "Status_Sonde"
     },
     {
-        "id": "a127fa8d.df2c4",
+        "id": "fdba7bbe.f5a758",
         "type": "comment",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "Status sonde sur topic /+/status",
         "info": "",
         "x": 138.5,
@@ -15,28 +15,28 @@
         "wires": []
     },
     {
-        "id": "795337b4.49cfc",
+        "id": "7933bbf.39e75c4",
         "type": "mqtt in",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "Status /+/status",
         "topic": "/+/status",
         "qos": "0",
-        "broker": "fe3ccd54.47756",
+        "broker": "9aed70de.28a338",
         "x": 85.5,
         "y": 128,
         "wires": [
             [
-                "953826ad.1a955",
-                "e7a518b.5027d68"
+                "2ad76907.aa6586",
+                "6c50b5e1.2b016c"
             ]
         ]
     },
     {
-        "id": "953826ad.1a955",
+        "id": "2ad76907.aa6586",
         "type": "debug",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "",
-        "active": false,
+        "active": true,
         "console": "false",
         "complete": "false",
         "x": 199,
@@ -44,24 +44,24 @@
         "wires": []
     },
     {
-        "id": "f2c59771.62e58",
+        "id": "11ad60e.7ff649f",
         "type": "adv ping",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "ping sonde",
         "host": "",
         "x": 492.5,
         "y": 130,
         "wires": [
             [
-                "f33ae9f3.c11be8",
-                "a810de11.a6004"
+                "546a3685.7de558",
+                "d9f5e530.4f2178"
             ]
         ]
     },
     {
-        "id": "f33ae9f3.c11be8",
+        "id": "546a3685.7de558",
         "type": "debug",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "",
         "active": false,
         "console": "false",
@@ -71,9 +71,9 @@
         "wires": []
     },
     {
-        "id": "e7a518b.5027d68",
+        "id": "6c50b5e1.2b016c",
         "type": "function",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "hostname sonde",
         "func": "var dataStr = msg.payload;\n\n//if individual node selected - the destination id should be last part of topic\n\n//split msg by /\nvar tokens = msg.topic.split(\"/\");\n\ncontext.sysname = tokens[1];\nmsg.host = context.sysname;\n    node.status({text:msg.host});\n    \nreturn msg;",
         "outputs": 1,
@@ -82,14 +82,14 @@
         "y": 129,
         "wires": [
             [
-                "f2c59771.62e58"
+                "11ad60e.7ff649f"
             ]
         ]
     },
     {
-        "id": "a810de11.a6004",
+        "id": "d9f5e530.4f2178",
         "type": "switch",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "",
         "property": "payload",
         "propertyType": "msg",
@@ -107,17 +107,17 @@
         "y": 130,
         "wires": [
             [
-                "d067c85d.f37888"
+                "fec7b495.e4cfb8"
             ],
             [
-                "10c250e2.c98da7"
+                "e8daee7d.4c89f"
             ]
         ]
     },
     {
-        "id": "d4068141.11006",
+        "id": "5d152fe0.82a048",
         "type": "comment",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "ping KO",
         "info": "",
         "x": 679,
@@ -125,9 +125,9 @@
         "wires": []
     },
     {
-        "id": "4202ddf2.63d7dc",
+        "id": "2bbd80d6.08ff6",
         "type": "comment",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "Anti-Spam",
         "info": "",
         "x": 949,
@@ -135,9 +135,9 @@
         "wires": []
     },
     {
-        "id": "d067c85d.f37888",
+        "id": "fec7b495.e4cfb8",
         "type": "delay",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "",
         "pauseType": "rate",
         "timeout": "1",
@@ -152,14 +152,14 @@
         "y": 130,
         "wires": [
             [
-                "73ddf54d.e1c224"
+                "5ef7ff63.2fc658"
             ]
         ]
     },
     {
-        "id": "73ddf54d.e1c224",
+        "id": "5ef7ff63.2fc658",
         "type": "delay",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "",
         "pauseType": "rate",
         "timeout": "4",
@@ -174,33 +174,33 @@
         "y": 130,
         "wires": [
             [
-                "8e54d72b.e65b9"
+                "8d188221.483b7"
             ]
         ]
     },
     {
-        "id": "8e54d72b.e65b9",
+        "id": "8d188221.483b7",
         "type": "template",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "Ping message",
         "field": "payload",
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "Serveur {{topic}} indisponible ! ",
+        "template": "Sonde {{topic}} indisponible ! ",
         "x": 1198,
         "y": 130,
         "wires": [
             [
-                "f111d795.5db3d8",
-                "5aab1322.e02d24"
+                "371ae949.8822f6",
+                "75a179fa.e3a1e8"
             ]
         ]
     },
     {
-        "id": "3737f0db.10429",
+        "id": "de133347.d846d",
         "type": "comment",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "Construction du message",
         "info": "",
         "x": 1214,
@@ -208,9 +208,9 @@
         "wires": []
     },
     {
-        "id": "73a98506.4432ec",
+        "id": "424a9d61.91e23c",
         "type": "comment",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "Transmission",
         "info": "",
         "x": 1376,
@@ -218,9 +218,9 @@
         "wires": []
     },
     {
-        "id": "f111d795.5db3d8",
+        "id": "371ae949.8822f6",
         "type": "e-mail",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "server": "smtp.gmail.com",
         "port": "465",
         "name": "coyotte14@gmail.com",
@@ -230,9 +230,9 @@
         "wires": []
     },
     {
-        "id": "b5d7f5b6.de5ff",
+        "id": "c1da75af.8a58",
         "type": "comment",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "Hostname Sonde",
         "info": "",
         "x": 286,
@@ -240,9 +240,9 @@
         "wires": []
     },
     {
-        "id": "fbbf4862.f528f8",
+        "id": "edef90ea.2c43d",
         "type": "comment",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "ping Hostname Sonde",
         "info": "",
         "x": 506,
@@ -250,9 +250,9 @@
         "wires": []
     },
     {
-        "id": "5f87dc8b.0df38c",
+        "id": "7285e56b.d5fff4",
         "type": "comment",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "ping OK",
         "info": "",
         "x": 663,
@@ -260,9 +260,9 @@
         "wires": []
     },
     {
-        "id": "10c250e2.c98da7",
+        "id": "e8daee7d.4c89f",
         "type": "delay",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "",
         "pauseType": "rate",
         "timeout": "1",
@@ -277,14 +277,14 @@
         "y": 253,
         "wires": [
             [
-                "15bdb642.de2d3a"
+                "b30023c7.1e4e78"
             ]
         ]
     },
     {
-        "id": "15bdb642.de2d3a",
+        "id": "b30023c7.1e4e78",
         "type": "delay",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "",
         "pauseType": "rate",
         "timeout": "4",
@@ -299,14 +299,14 @@
         "y": 253,
         "wires": [
             [
-                "75ab68ea.7cd2e"
+                "a65a84c.27b2178"
             ]
         ]
     },
     {
-        "id": "75ab68ea.7cd2e",
+        "id": "a65a84c.27b2178",
         "type": "template",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "Ping message",
         "field": "payload",
         "fieldType": "msg",
@@ -317,15 +317,15 @@
         "y": 253,
         "wires": [
             [
-                "f111d795.5db3d8",
-                "5aab1322.e02d24"
+                "371ae949.8822f6",
+                "75a179fa.e3a1e8"
             ]
         ]
     },
     {
-        "id": "5aab1322.e02d24",
+        "id": "75a179fa.e3a1e8",
         "type": "debug",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "",
         "active": true,
         "console": "false",
@@ -335,9 +335,9 @@
         "wires": []
     },
     {
-        "id": "ffe23a67.473cc8",
+        "id": "5169dcff.a02fbc",
         "type": "comment",
-        "z": "ae6500ff.2509e",
+        "z": "db311664.5b79e",
         "name": "Test MQTT indisponible",
         "info": "mosquitto_pub -t /T-Veranda/status -m \"7\"\nmosquitto_pub -t /T-Salon/status -m \"hs\"\nmosquitto_pub -t /P-Garage1/status -m \"ok\"",
         "x": 107,
@@ -345,24 +345,21 @@
         "wires": []
     },
     {
-        "id": "fe3ccd54.47756",
+        "id": "9aed70de.28a338",
         "type": "mqtt-broker",
         "z": "",
-        "broker": "192.168.1.30",
+        "broker": "192.168.1.40",
         "port": "1883",
-        "tls": null,
         "clientid": "",
         "usetls": false,
         "compatmode": true,
-        "keepalive": "15",
+        "keepalive": "60",
         "cleansession": true,
         "willTopic": "",
         "willQos": "0",
-        "willRetain": "false",
         "willPayload": "",
         "birthTopic": "",
         "birthQos": "0",
-        "birthRetain": "false",
         "birthPayload": ""
     }
 ]
