@@ -1,6 +1,47 @@
 #!/bin/bash
 
 ##########################################################################"
+### Script d'extraction de la qualité de l'air à partir du site :
+### http://www.lcsqa.org/indices-qualite-air/liste/jour
+### Publication journalière de la prévision de qualité de l'air du jour pour
+### plus de 100 villes françaises
+###
+### Utilisation
+### qair.bash
+###	sans paramètre, utilise la ville par défaut configurée dans les paramètres ci-dessous
+###
+### qair.bash Calais
+###	qualité de l'air pour la ville de Calais
+###
+### Fichiers générés en sortie
+### 	/var/www.html/air/qair.txt
+###		contient uniquement l'indice de qualité de l'air de la ville
+###
+### 	/var/www.html/air/qair.json
+###		contient toutes les informations qualité de l'air de la ville au format json
+###		exemple pour la ville de Calais :
+###		{"date":"2017-06-06","ville":"CALAIS","qualite-air":3,"niveau":"Bon","O3":3,"NO2":1,"PM10":2}
+###
+### 	/var/www.html/air/qair.xml
+###		contient toutes les informations qualité de l'air de la ville au format xml
+###		exemple pour la ville de Calais :
+###		<?xml version="1.0" encoding="ISO-8859-1" ?>
+###		<data>
+###		<date>2017-06-06</date>
+###		<ville>CALAIS</ville>
+###		<niveau>Bon</niveau>
+###		<indice>3</indice>
+###		<O3>3</O3>
+###		<NO2>1</NO2>
+###		<PM10>2</PM10>
+###		</data>
+###
+### 	/var/www.html/air/qairville.txt
+###	liste des villes comportant des données qualité de l'air
+###
+##########################################################################"
+
+##########################################################################"
 ### Configuration
 tmpfile="indices-qualite-air.tmp"
 airdir="/var/www/html/air"
@@ -9,8 +50,8 @@ txtfile="$airdir/qair.txt"
 xmlfile="$airdir/qair.xml"
 villefile="$airdir/qairville.txt"
 villedefaut="CAEN"
-#DEBUG=false
-DEBUG=true
+DEBUG=false
+#DEBUG=true
 ### End Configuration
 ##########################################################################"
 
@@ -166,7 +207,9 @@ echo "</data>" >> $xmlfile
 ###debug
 if [ "$DEBUG" = "true" ]
 then
-	echo "Informations debug"
+	echo "-----------------------------"
+	debugdate=$(date +%Y%m%d-%H:%M:%S)
+	echo "$debugdate Informations debug"
 	echo "ville : " $ville
 	echo "date : " $date
 	echo "indice pollution : " $indice
@@ -178,6 +221,12 @@ then
 	echo "fichier json : "  $jsonfile
 	echo "fichier xml : " $xmlfile
 	echo "fichier txt : " $txtfile
+	debugdate=$(date +%Y%m%d-%H:%M:%S)
+	echo "$debugdate Fin Informations debug"
+	echo "-----------------------------"
+else
+	debugdate=$(date +%Y%m%d-%H:%M:%S)
+	echo "$debugdate $ville indice pollution :  $indice"
 fi
 
 ##########################################################################"
