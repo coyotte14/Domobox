@@ -157,7 +157,7 @@ if [ $skip -eq 0 ]; then
 fi
 
 # =============================================================================================
-task_start "Install Script qualité de l'air?" "Installing Qualité de l'air"
+task_start "Install Script qualite de l'air?" "Installing Qualitï¿½ de l'air"
 if [ $skip -eq 0 ]; then
 	cd
 	mkdir air
@@ -267,7 +267,7 @@ if [ $skip -eq 0 ]; then
 	mkdir /usr/lib/node_modules/node-red/public/myjs/RGraph
 	cp * /usr/lib/node_modules/node-red/public/myjs/RGraph/
 	cd
-        task_end
+    task_end
 fi
 
 # =============================================================================================
@@ -276,6 +276,17 @@ if [ $skip -eq 0 ]; then
     cd
 	wget https://raw.githubusercontent.com/coyotte14/Domobox/master/icones.tgz 
 	sudo tar xvfz icones.tgz -C /var/www/html/
+	cd
+    task_end
+fi
+
+# =============================================================================================
+task_start "Install My index HTTP?" "Installing My index HTTP"
+if [ $skip -eq 0 ]; then
+    cd
+	mkdir httpd
+    cd httpd
+	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/index.html  -O /var/www/html/index.html
 	cd
     task_end
 fi
