@@ -40,6 +40,7 @@ yes=0
 nohelp=0
 hideother=0
 
+mytrace='./domobox-install.log'
  
 timecount(){
 	sec=30
@@ -111,7 +112,7 @@ task_end(){
     printf "${BICyan}%*s${BIWhite}\n" $columns '[OK]'
 }
 
-
+touch .
 # =============================================================================================
 task_start "Install Node-Red modules?" "Installing Node-Red modules"
 if [ $skip -eq 0 ]; then
@@ -120,7 +121,7 @@ if [ $skip -eq 0 ]; then
 	cd .node-red
 	npm install node-red-contrib-config
 	npm install node-red-contrib-advanced-ping
-	npm install node-red-node-weather-underground
+	npm install node-red-node-weather-undergroundmytrace
 	npm install node-red-node-forecastio
 	npm install node-red-node-smooth
 	npm install node-red-node-openweathermap
@@ -130,6 +131,7 @@ if [ $skip -eq 0 ]; then
 	npm install node-red-contrib-squeezebox
 	npm install https://github.com/Averelll/node-red-contrib-rfxcom
 	cd
+	echo "mytrace" >> $mytrace 
 	task_end
 fi
 
@@ -153,11 +155,12 @@ if [ $skip -eq 0 ]; then
     sudo chmod 755 /etc/init.d/domogeek
     sudo systemctl enable domogeek.service
 	cd
+	echo "Domogeek" >> $mytrace
 	task_end
 fi
 
 # =============================================================================================
-task_start "Install Script qualite de l'air?" "Installing Qualit� de l'air"
+task_start "Install Script qualite de l'air?" "Installing Qualite de l'air"
 if [ $skip -eq 0 ]; then
 	cd
 	mkdir air
@@ -168,6 +171,7 @@ if [ $skip -eq 0 ]; then
     sudo chown -R www-data:www-data /var/www/html/air
     sudo cp air.crontab /etc/cron.d/air.crontab
 	cd
+	echo "air" >> $mytrace
 	task_end
 fi
 
@@ -179,8 +183,9 @@ if [ $skip -eq 0 ]; then
 	sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
 	sudo apt-get update
 	sudo apt-get install -y docker-engine
-	sudo systemctl status docker
+	sudo systemctl status docker |head -12
 	cd
+	echo "Docker" >> $mytrace
 	task_end
 fi
 
@@ -194,6 +199,7 @@ if [ $skip -eq 0 ]; then
 	sudo useradd --password `openssl passwd -1 bipbip14` camera
 	sudo docker restart mqtt-camera-ftpd
 	cd
+	echo "mqtt-camera-ftpd" >> $mytrace
 	task_end
 fi
 
@@ -221,6 +227,7 @@ if [ $skip -eq 0 ]; then
 	sudo /usr/sbin/a2enmod proxy_html
 	sudo /etc/init.d/apache2 restart
 	cd
+	echo "Owntrack" >> $mytrace
 	task_end
 fi
 
@@ -239,19 +246,22 @@ if [ $skip -eq 0 ]; then
 	sudo crontab -u root /tmp/crontabroot
 	rm /tmp/crontabroot
 	cd
+	echo "socat" >> $mytrace
 	task_end
 fi
 
 # =============================================================================================
 task_start "Install Skycon.js and icons for node-red meteo?" "Installing Skycons"
 if [ $skip -eq 0 ]; then
-        cd
-        mkdir /usr/lib/node_modules/node-red/public/myjs
-        cd /usr/lib/node_modules/node-red/public/myjs
-        wget https://raw.githubusercontent.com/maxdow/skycons/master/skycons.js
-        wget https://canvas-gauges.com/download/latest/all/gauge.min.js
-        cd
-        task_end
+    cd
+    mkdir /usr/lib/node_modules/node-red/public/myjs
+    cd /usr/lib/node_modules/node-red/public/myjs
+    wget https://raw.githubusercontent.com/maxdow/skycons/master/skycons.js
+    wget https://canvas-gauges.com/download/latest/all/gauge.min.js
+    cd
+	echo "socat" >> $mytrace
+    task_end
+	
 fi
 
 
@@ -267,6 +277,7 @@ if [ $skip -eq 0 ]; then
 	mkdir /usr/lib/node_modules/node-red/public/myjs/RGraph
 	cp * /usr/lib/node_modules/node-red/public/myjs/RGraph/
 	cd
+	echo "Rgraph" >> $mytrace
     task_end
 fi
 
@@ -277,6 +288,7 @@ if [ $skip -eq 0 ]; then
 	wget https://raw.githubusercontent.com/coyotte14/Domobox/master/icones.tgz 
 	sudo tar xvfz icones.tgz -C /var/www/html/
 	cd
+	echo "Icones" >> $mytrace
     task_end
 fi
 
@@ -288,5 +300,6 @@ if [ $skip -eq 0 ]; then
     cd httpd
 	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/index.html  -O /var/www/html/index.html
 	cd
+	echo "index" >> $mytrace
     task_end
 fi
