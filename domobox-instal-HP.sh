@@ -1,5 +1,10 @@
 #!/bin/bash
- 
+
+#
+# Installation 
+# wget https://raw.githubusercontent.com/coyotte14/Domobox/master/domobox-instal-HP.sh
+# chmod +x  domobox-instal-HP.sh
+#
 # ROUTINES
 # Here at the beginning, a load of useful routines - see further down
 
