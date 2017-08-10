@@ -1,0 +1,10 @@
+{
+    "name": "node-red-project",
+    "description": "A Node-RED Domotic Project",
+    "version": "1.0.0",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/coyotte14/Domobox/blob/master/domobox-instal-HP.sh"
+    },
+   "license": "UNLICENSED"
+}
