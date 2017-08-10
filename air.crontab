@@ -1,6 +1,0 @@
-#  /etc/cron.d/air.crontab  Script qualité air
-SHELL=/bin/sh
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-
-0 5 * * * root curl http://127.0.0.1/air/enregistrement_qualite_air.php >> /var/log/air.log 2>&1
-5 5 * * * root curl http://127.0.0.1/air/exploit_data_my.php >> /var/log/air.log  2>&1
