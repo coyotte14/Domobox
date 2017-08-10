@@ -44,7 +44,7 @@
 ##########################################################################"
 ### Configuration
 tmpfile="indices-qualite-air.tmp"
-airdir="/var/www/html/air"
+airdir="/var/www/html/qair"
 jsonfile="$airdir/qair.json"
 txtfile="$airdir/qair.txt"
 xmlfile="$airdir/qair.xml"
