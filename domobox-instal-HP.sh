@@ -122,9 +122,11 @@ touch .
 # =============================================================================================
 task_start "Install Node-Red modules?" "Installing Node-Red modules"
 if [ $skip -eq 0 ]; then
-	cd
+	cd	
 	sudo npm install -g node-red-admin
 	cd .node-red
+	sudo rm ./package.json
+	sudo wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/package.json
 	npm install node-red-contrib-config
 	npm install node-red-contrib-advanced-ping
 	npm install node-red-node-weather-underground
@@ -170,17 +172,16 @@ fi
 task_start "Install Script qualite de l'air?" "Installing Qualite de l'air"
 if [ $skip -eq 0 ]; then
 	cd
-	mkdir air
-	cd air
-    wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/air.tgz
-	wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/air.crontab
-    sudo tar xfz air.tgz -C /var/www/html
-    sudo chown -R www-data:www-data /var/www/html/air
-    sudo cp air.crontab /etc/cron.d/air.crontab
-	sudo curl http://127.0.0.1/air/enregistrement_qualite_air.php >> /var/log/air.log 2>&1
-	sudo curl http://127.0.0.1/air/exploit_data_my.php >> /var/log/air.log  2>&1	
+	mkdir qair
+	cd qair
+    wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/qair/qair.bash
+	wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/qair/qair.crontab
+    sudo cp -R ../qair /var/www/html/qair
+    sudo chown -R www-data:www-data /var/www/html/qair
+    sudo cp qair.crontab /etc/cron.d/qair.crontab
+	sudo /var/www/html/qair/qair.bash
 	cd
-	echo "air" >> $mytrace
+	echo "qair" >> $mytrace
 	task_end
 fi
 
@@ -204,6 +205,7 @@ if [ $skip -eq 0 ]; then
 	cd
 	sudo docker pull stjohnjohnson/mqtt-camera-ftpd
 	sudo docker run -d --name="mqtt-camera-ftpd" -v /opt/mqtt-camera-ftpd:/config -p 21:21 stjohnjohnson/mqtt-camera-ftpd
+	sleep 2s
 	sudo sed -i -e 's/host: mqtt/host: localhost/g' /opt/mqtt-camera-ftpd/config.yml
 	sudo useradd --password `openssl passwd -1 bipbip14` camera
 	sudo docker restart mqtt-camera-ftpd
@@ -224,8 +226,8 @@ if [ $skip -eq 0 ]; then
 	sudo apt-get update
 	wget http://launchpadlibrarian.net/206707239/libsodium13_1.0.3-1_amd64.deb
 	sudo apt-get install ./libsodium13_1.0.3-1_amd64.deb
-	sudo apt-get install libsodium-dev
-	sudo apt-get install ot-recorder
+	sudo apt-get install -y libsodium-dev
+	sudo apt-get install -y ot-recorder
 	sudo sed -i -e 's#\# OTR_USER=""#OTR_USER="admin"#g' /etc/default/ot-recorder
 	sudo sed -i -e 's#\# OTR_PASS=""#OTR_PASS="huup6380!"#g' /etc/default/ot-recorder
 	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/Owntracks/local -O /etc/rc.local
