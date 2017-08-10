@@ -1,0 +1,5 @@
+#  /etc/cron.d/air.crontab  Script qualité air
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+10 11 * * * root /home/pi/air/qair.bash >> /var/log/qair.log 2>&1
