@@ -103,7 +103,8 @@ if  [ "$user_response" = "h" ]; then
 fi 
 if  [ "$user_response" = "y" ]; then
     yes=1
-fi 
+fi
+ 
 if [ -n  "$2" ]; then
     if [ $skip -eq 0 ]; then
         printf "${BIYellow}$2${BIWhite}\n"
@@ -126,7 +127,7 @@ if [ $skip -eq 0 ]; then
 	cd .node-red
 	npm install node-red-contrib-config
 	npm install node-red-contrib-advanced-ping
-	npm install node-red-node-weather-undergroundmytrace
+	npm install node-red-node-weather-underground
 	npm install node-red-node-forecastio
 	npm install node-red-node-smooth
 	npm install node-red-node-openweathermap
@@ -159,6 +160,7 @@ if [ $skip -eq 0 ]; then
     sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/domogeek.init -O /etc/init.d/domogeek
     sudo chmod 755 /etc/init.d/domogeek
     sudo systemctl enable domogeek.service
+	sudo /etc/init.d/domogeek start
 	cd
 	echo "Domogeek" >> $mytrace
 	task_end
@@ -175,6 +177,8 @@ if [ $skip -eq 0 ]; then
     sudo tar xfz air.tgz -C /var/www/html
     sudo chown -R www-data:www-data /var/www/html/air
     sudo cp air.crontab /etc/cron.d/air.crontab
+	sudo curl http://127.0.0.1/air/enregistrement_qualite_air.php >> /var/log/air.log 2>&1
+	sudo curl http://127.0.0.1/air/exploit_data_my.php >> /var/log/air.log  2>&1	
 	cd
 	echo "air" >> $mytrace
 	task_end
@@ -206,6 +210,7 @@ if [ $skip -eq 0 ]; then
 	cd
 	echo "mqtt-camera-ftpd" >> $mytrace
 	task_end
+	# sed: impossible de lire /opt/mqtt-camera-ftpd/config.yml: Aucun fichier ou dossier de ce type
 fi
 
 # =============================================================================================
