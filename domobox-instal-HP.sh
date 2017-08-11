@@ -137,7 +137,11 @@ if [ $skip -eq 0 ]; then
 	npm install node-red-node-geofence
 	npm install node-red-node-google
 	npm install node-red-contrib-squeezebox
+	npm install node-red-node-forecastio
+	npm install node-red-contrib-advanced-ping
 	npm install https://github.com/Averelll/node-red-contrib-rfxcom
+	/usr/bin/node-red-stop
+	/usr/bin/node-red-start
 	cd
 	echo "mytrace" >> $mytrace 
 	task_end
@@ -179,6 +183,7 @@ if [ $skip -eq 0 ]; then
     sudo cp -R ../qair /var/www/html/qair
     sudo chown -R www-data:www-data /var/www/html/qair
     sudo cp qair.crontab /etc/cron.d/qair.crontab
+	sudo chmod +x /var/www/html/qair/qair.bash
 	sudo /var/www/html/qair/qair.bash
 	cd
 	echo "qair" >> $mytrace
@@ -230,14 +235,21 @@ if [ $skip -eq 0 ]; then
 	sudo apt-get install -y ot-recorder
 	sudo sed -i -e 's#\# OTR_USER=""#OTR_USER="admin"#g' /etc/default/ot-recorder
 	sudo sed -i -e 's#\# OTR_PASS=""#OTR_PASS="huup6380!"#g' /etc/default/ot-recorder
+	sudo sed -i -e 's#\# OTR_GEOKEY=""#OTR_GEOKEY="AIzaSyBCdi1b88QSDL_eUK9R7lK8VPN0rbri1ko"#g' /etc/default/ot-recorder
+	sudo sed -i -e 's#\# OTR_BROWSERAPIKEY=""#OTR_BROWSERAPIKEY="AIzaSyBCdi1b88QSDL_eUK9R7lK8VPN0rbri1ko"#g' /etc/default/ot-recorder
 	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/Owntracks/local -O /etc/rc.local
-    	sudo chmod 755  /etc/rc.local
-	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/Owntracks/ot-recorder.conf  -O ot-recorder.conf 
+    sudo chmod 755  /etc/rc.local
+	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/Owntracks/ot-recorder.conf  -O  /etc/apache2/conf-available/ot-recorder.conf 
 	sudo /usr/sbin/ot-recorder 'owntracks/#' &
 	sudo /usr/sbin/a2enmod proxy_http
 	sudo /usr/sbin/a2enmod proxy_wstunnel
 	sudo /usr/sbin/a2enmod proxy_html
+	sudo /usr/sbin/a2enconf ot-recorder
 	sudo /etc/init.d/apache2 restart
+	sudo mosquitto_passwd -b /etc/mosquitto/passwords poirier huup6380!
+	sudo mosquitto_passwd -b /etc/mosquitto/passwords HP huup6380!
+	sudo mosquitto_passwd -b /etc/mosquitto/passwords CP huup6380!
+	sudo /etc/init.d/mosquitto restart
 	cd
 	echo "Owntrack" >> $mytrace
 	task_end
