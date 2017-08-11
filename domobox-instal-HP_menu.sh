@@ -298,32 +298,32 @@ printstatus "new hostname"
 newhostname=$(whiptail --inputbox "Enter new HOST name\nLeave the default value or select something new" 8 60 $newhostname 3>&1 1>&2 2>&3)
 
 if [[ $MYMENU == *"nodered"* ]]; then
-    echo "Install node-red modules"
-	cd	
-	sudo npm install -g node-red-admin
+	cd
+	printstatus "Installing Nodes"	
+	sudo npm $NQUIET install -g node-red-admin 2>&1 | tee -a $LOGFILE
 	cd .node-red
 	sudo rm ./package.json
-	sudo wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/package.json
+	sudo wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/package.json 2>&1 | tee -a $LOGFILE
 	#npm WARN deprecated node-uuid@1.4.8: Use uuid module instead
-	npm uninstall --save node-uuid
-	npm install uuid
+	npm uninstall --save node-uuid 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install uuid 2>&1 | tee -a $LOGFILE
 	#npm WARN deprecated minimatch@2.0.10: Please update to minimatch 3.0.2 or higher to avoid a RegExp DoS issue
 	npm update minimatch@3.0.2
-	npm install node-red-contrib-config
-	npm install node-red-contrib-advanced-ping
-	npm install node-red-node-weather-underground
-	npm install node-red-node-forecastio
-	npm install node-red-node-smooth
-	npm install node-red-node-openweathermap
-	npm install node-red-contrib-owntracks
-	npm install node-red-node-geofence
-	npm install node-red-node-google
-	npm install node-red-contrib-squeezebox
-	npm install node-red-node-forecastio
-	npm install node-red-contrib-advanced-ping
-	npm install https://github.com/Averelll/node-red-contrib-rfxcom
-	/usr/bin/node-red-stop
-	/usr/bin/node-red-start &
+	npm $NQUIET install node-red-contrib-config 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-contrib-advanced-ping 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-node-weather-underground 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-node-forecastio 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-node-smooth 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-node-openweathermap 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-contrib-owntracks 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-node-geofence 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-node-google 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-contrib-squeezebox 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-node-forecastio 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-contrib-advanced-ping 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install https://github.com/Averelll/node-red-contrib-rfxcom 2>&1 | tee -a $LOGFILE
+	/usr/bin/node-red-stop 2>&1 | tee -a $LOGFILE
+	/usr/bin/node-red-start & 2>&1 | tee -a $LOGFILE
 	cd
 fi
 
@@ -333,20 +333,20 @@ if [[ $MYMENU == *"domogeek"* ]]; then
 	cd
     mkdir domogeek
     cd domogeek
-    wget --no-verbose https://bootstrap.pypa.io/get-pip.py
-    sudo python get-pip.py
-    sudo python -m pip install web.py beautifulsoup4 icalendar requests redis
-    sudo apt-get install redis-server -y
-    wget --no-verbose https://github.com/guiguiabloc/api-domogeek/archive/master.zip
+    wget --no-verbose https://bootstrap.pypa.io/get-pip.py 2>&1 | tee -a $LOGFILE
+    sudo python get-pip.py 2>&1 | tee -a $LOGFILE
+    sudo python -m pip install web.py beautifulsoup4 icalendar requests redis 2>&1 | tee -a $LOGFILE
+    sudo apt-get install redis-server -y 2>&1 | tee -a $LOGFILE
+    wget --no-verbose https://github.com/guiguiabloc/api-domogeek/archive/master.zip 2>&1 | tee -a $LOGFILE
     unzip -qq master.zip
     cd api-domogeek-master
     sudo chmod +x apidomogeek.py
     sudo sed -i -e 's#listenport = "80"#listenport = "81"#g' apidomogeek.py
     sudo sed -i -e 's#localapiurl= "http://api.domogeek.fr"#localapiurl= "http://domogeek.entropialux.com"#g' apidomogeek.py
-    sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/domogeek.init -O /etc/init.d/domogeek
+    sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/domogeek.init -O /etc/init.d/domogeek 2>&1 | tee -a $LOGFILE
     sudo chmod 755 /etc/init.d/domogeek
-    sudo systemctl enable domogeek.service
-	sudo /etc/init.d/domogeek start
+    sudo systemctl enable domogeek.service 2>&1 | tee -a $LOGFILE
+	sudo /etc/init.d/domogeek start 2>&1 | tee -a $LOGFILE
 	cd
 fi
 
@@ -355,36 +355,36 @@ if [[ $MYMENU == *"qair"* ]]; then
 	cd
 	mkdir qair
 	cd qair
-    wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/qair/qair.bash
-	wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/qair/qair.crontab
-    sudo cp -R ../qair /var/www/html/qair
-    sudo chown -R www-data:www-data /var/www/html/qair
+    wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/qair/qair.bash 2>&1 | tee -a $LOGFILE
+	wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/qair/qair.crontab 2>&1 | tee -a $LOGFILE
+    sudo cp -R ../qair /var/www/html/qair 2>&1 | tee -a $LOGFILE
+    sudo chown -R www-data:www-data /var/www/html/qair 
     sudo cp qair.crontab /etc/cron.d/qair.crontab
 	sudo chmod +x /var/www/html/qair/qair.bash
-	sudo /var/www/html/qair/qair.bash
+	sudo /var/www/html/qair/qair.bash 2>&1 | tee -a $LOGFILE
 	cd
 fi
 
 if [[ $MYMENU == *"docker"* ]]; then
     printstatus "Install Docker"
 	cd
-    sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-	sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
+    sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D 2>&1 | tee -a $LOGFILE
+	sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' 2>&1 | tee -a $LOGFILE
 	sudo apt-get update
-	sudo apt-get install -y docker-engine
-	sudo systemctl status docker |head -12
+	sudo apt-get install -y docker-engine 2>&1 | tee -a $LOGFILE
+	sudo systemctl status docker |head -12 2>&1 | tee -a $LOGFILE
 	cd
 fi
 
 if [[ $MYMENU == *"mqtt-camera-ftpd"* ]]; then
     printstatus "Install mqtt-camera-ftpd"
 	cd
-	sudo docker pull stjohnjohnson/mqtt-camera-ftpd
-	sudo docker run -d --name="mqtt-camera-ftpd" -v /opt/mqtt-camera-ftpd:/config -p 21:21 stjohnjohnson/mqtt-camera-ftpd
+	sudo docker pull stjohnjohnson/mqtt-camera-ftpd 2>&1 | tee -a $LOGFILE
+	sudo docker run -d --name="mqtt-camera-ftpd" -v /opt/mqtt-camera-ftpd:/config -p 21:21 stjohnjohnson/mqtt-camera-ftpd 2>&1 | tee -a $LOGFILE
 	sleep 2s
-	sudo sed -i -e 's/host: mqtt/host: localhost/g' /opt/mqtt-camera-ftpd/config.yml
-	sudo useradd --password `openssl passwd -1 bipbip14` camera
-	sudo docker restart mqtt-camera-ftpd
+	sudo sed -i -e 's/host: mqtt/host: localhost/g' /opt/mqtt-camera-ftpd/config.yml 2>&1 | tee -a $LOGFILE
+	sudo useradd --password `openssl passwd -1 bipbip14` camera 2>&1 | tee -a $LOGFILE
+	sudo docker restart mqtt-camera-ftpd 2>&1 | tee -a $LOGFILE
 	cd
 fi
 
@@ -393,39 +393,39 @@ if [[ $MYMENU == *"owntrack"* ]]; then
 	cd
 	mkdir owntrack
 	cd owntrack
-	curl http://repo.owntracks.org/repo.owntracks.org.gpg.key | sudo apt-key add -
+	curl http://repo.owntracks.org/repo.owntracks.org.gpg.key | sudo apt-key add - 2>&1 | tee -a $LOGFILE
 	echo "deb [arch=amd64]  http://repo.owntracks.org/debian jessie main" | sudo tee /etc/apt/sources.list.d/owntracks.list > /dev/null
 	sudo apt-get update
-	wget http://launchpadlibrarian.net/206707239/libsodium13_1.0.3-1_amd64.deb
-	sudo apt-get install ./libsodium13_1.0.3-1_amd64.deb
-	sudo apt-get install -y libsodium-dev
-	sudo apt-get install -y ot-recorder
+	wget http://launchpadlibrarian.net/206707239/libsodium13_1.0.3-1_amd64.deb 2>&1 | tee -a $LOGFILE
+	sudo apt-get install ./libsodium13_1.0.3-1_amd64.deb 2>&1 | tee -a $LOGFILE
+	sudo apt-get install -y libsodium-dev 2>&1 | tee -a $LOGFILE
+	sudo apt-get install -y ot-recorder 2>&1 | tee -a $LOGFILE
 	sudo sed -i -e 's#\# OTR_USER=""#OTR_USER="admin"#g' /etc/default/ot-recorder
 	sudo sed -i -e 's#\# OTR_PASS=""#OTR_PASS="huup6380!"#g' /etc/default/ot-recorder
 	sudo sed -i -e 's#\# OTR_GEOKEY=""#OTR_GEOKEY="AIzaSyBCdi1b88QSDL_eUK9R7lK8VPN0rbri1ko"#g' /etc/default/ot-recorder
 	sudo sed -i -e 's#\# OTR_BROWSERAPIKEY=""#OTR_BROWSERAPIKEY="AIzaSyBCdi1b88QSDL_eUK9R7lK8VPN0rbri1ko"#g' /etc/default/ot-recorder
-	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/Owntracks/local -O /etc/rc.local
+	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/Owntracks/local -O /etc/rc.local 2>&1 | tee -a $LOGFILE
     sudo chmod 755  /etc/rc.local
-	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/Owntracks/ot-recorder.conf  -O  /etc/apache2/conf-available/ot-recorder.conf 
-	sudo /usr/sbin/ot-recorder 'owntracks/#' &
-	sudo /usr/sbin/a2enmod proxy_http
-	sudo /usr/sbin/a2enmod proxy_wstunnel
-	sudo /usr/sbin/a2enmod proxy_html
-	sudo /usr/sbin/a2enconf ot-recorder
-	sudo /etc/init.d/apache2 restart
+	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/Owntracks/ot-recorder.conf  -O  /etc/apache2/conf-available/ot-recorder.conf  2>&1 | tee -a $LOGFILE
+	sudo /usr/sbin/ot-recorder 'owntracks/#' & 2>&1 | tee -a $LOGFILE
+	sudo /usr/sbin/a2enmod proxy_http 2>&1 | tee -a $LOGFILE
+	sudo /usr/sbin/a2enmod proxy_wstunnel 2>&1 | tee -a $LOGFILE
+	sudo /usr/sbin/a2enmod proxy_html 2>&1 | tee -a $LOGFILE
+	sudo /usr/sbin/a2enconf ot-recorder 2>&1 | tee -a $LOGFILE
+	sudo /etc/init.d/apache2 restart 2>&1 | tee -a $LOGFILE
 	sudo mosquitto_passwd -b /etc/mosquitto/passwords poirier huup6380!
 	sudo mosquitto_passwd -b /etc/mosquitto/passwords HP huup6380!
 	sudo mosquitto_passwd -b /etc/mosquitto/passwords CP huup6380!
-	sudo /etc/init.d/mosquitto restart
+	sudo /etc/init.d/mosquitto restart 2>&1 | tee -a $LOGFILE
 	cd
 fi
 
 if [[ $MYMENU == *"socat"* ]]; then
     printstatus "Install Socat"
 	cd
-	sudo apt-get install socat
-	sudo wget -O /etc/remote-tty.conf https://raw.githubusercontent.com/NicolasBernaerts/debian-scripts/master/remote-tty/remote-tty.conf
-	sudo wget -O /usr/local/bin/remote-tty https://raw.githubusercontent.com/NicolasBernaerts/debian-scripts/master/remote-tty/remote-tty
+	sudo apt-get install socat 2>&1 | tee -a $LOGFILE
+	sudo wget -O /etc/remote-tty.conf https://raw.githubusercontent.com/NicolasBernaerts/debian-scripts/master/remote-tty/remote-tty.conf 2>&1 | tee -a $LOGFILE
+	sudo wget -O /usr/local/bin/remote-tty https://raw.githubusercontent.com/NicolasBernaerts/debian-scripts/master/remote-tty/remote-tty 2>&1 | tee -a $LOGFILE
 	sudo chmod +x /usr/local/bin/remote-tty
 	echo "192.168.1.254;1001;ttyUSB0" | sudo tee /etc/remote-tty.conf > /dev/null
 	sudo sed -i -e 's#link=/dev/${LOCAL_TTY}#link=/dev/${LOCAL_TTY},mode=666,group=dialout#g' /usr/local/bin/remote-tty
@@ -441,8 +441,8 @@ if [[ $MYMENU == *"skycon.js"* ]]; then
     cd
     mkdir /usr/lib/node_modules/node-red/public/myjs
     cd /usr/lib/node_modules/node-red/public/myjs
-    wget https://raw.githubusercontent.com/maxdow/skycons/master/skycons.js
-    wget https://canvas-gauges.com/download/latest/all/gauge.min.js
+    wget https://raw.githubusercontent.com/maxdow/skycons/master/skycons.js 2>&1 | tee -a $LOGFILE
+    wget https://canvas-gauges.com/download/latest/all/gauge.min.js 2>&1 | tee -a $LOGFILE
     cd
 fi
 
@@ -451,28 +451,26 @@ if [[ $MYMENU == *"rgraph"* ]]; then
     cd
 	mkdir Rgraph
     cd Rgraph
-	wget https://www.rgraph.net/downloads/RGraph4.62-stable.zip
-	unzip RGraph4.62-stable.zip
+	wget https://www.rgraph.net/downloads/RGraph4.62-stable.zip 2>&1 | tee -a $LOGFILE
+	unzip RGraph4.62-stable.zip 2>&1 | tee -a $LOGFILE
 	cd RGraph/libraries/
 	mkdir /usr/lib/node_modules/node-red/public/myjs/RGraph
-	cp * /usr/lib/node_modules/node-red/public/myjs/RGraph/
+	cp * /usr/lib/node_modules/node-red/public/myjs/RGraph/ 2>&1 | tee -a $LOGFILE
 	cd
 fi
 
 if [[ $MYMENU == *"node-red-icon"* ]]; then
     printstatus "Install Node-Red Icons"
     cd
-	wget https://raw.githubusercontent.com/coyotte14/Domobox/master/icones.tgz 
-	sudo tar xvfz icones.tgz -C /var/www/html/
+	wget https://raw.githubusercontent.com/coyotte14/Domobox/master/icones.tgz  2>&1 | tee -a $LOGFILE
+	sudo tar xvfz icones.tgz -C /var/www/html/ 2>&1 | tee -a $LOGFILE
 	cd
 fi
 
 if [[ $MYMENU == *"addindex"* ]]; then
     printstatus "Install My HTTP index file"
     cd
-	mkdir httpd
-    cd httpd
-	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/index.html  -O /var/www/html/index.html
+	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/index.html  -O /var/www/html/index.html 2>&1 | tee -a $LOGFILE
 	cd
 fi
 
@@ -491,214 +489,3 @@ printf 'When you are happy, remove the script from the /home/pi directory.\r\n'
 printf 'Current IP: %s  Hostname: %s\r\n' "$myip" "$thehostname"
 echo -e Current IP: $myip  Hostname: $thehostname >> $LOGFILE
 printstatus  "ALL DONE - PLEASE REBOOT NOW THEN TEST"
-
-exit
-
-# =============================================================================================
-task_start "Install Node-Red modules?" "Installing Node-Red modules"
-if [ $skip -eq 0 ]; then
-	cd	
-	sudo npm install -g node-red-admin
-	cd .node-red
-	sudo rm ./package.json
-	sudo wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/package.json
-	npm install node-red-contrib-config
-	npm install node-red-contrib-advanced-ping
-	npm install node-red-node-weather-underground
-	npm install node-red-node-forecastio
-	npm install node-red-node-smooth
-	npm install node-red-node-openweathermap
-	npm install node-red-contrib-owntracks
-	npm install node-red-node-geofence
-	npm install node-red-node-google
-	npm install node-red-contrib-squeezebox
-	npm install node-red-node-forecastio
-	npm install node-red-contrib-advanced-ping
-	npm install https://github.com/Averelll/node-red-contrib-rfxcom
-	/usr/bin/node-red-stop
-	/usr/bin/node-red-start
-	cd
-	echo "mytrace" >> $mytrace 
-	task_end
-fi
-
-# =============================================================================================
-task_start "Install Domogeek?" "Installing Domogeek"
-if [ $skip -eq 0 ]; then
-	cd
-    mkdir domogeek
-    cd domogeek
-    wget --no-verbose https://bootstrap.pypa.io/get-pip.py
-    sudo python get-pip.py
-    sudo python -m pip install web.py beautifulsoup4 icalendar requests redis
-    sudo apt-get install redis-server -y
-    wget --no-verbose https://github.com/guiguiabloc/api-domogeek/archive/master.zip
-    unzip -qq master.zip
-    cd api-domogeek-master
-    sudo chmod +x apidomogeek.py
-    sudo sed -i -e 's#listenport = "80"#listenport = "81"#g' apidomogeek.py
-    sudo sed -i -e 's#localapiurl= "http://api.domogeek.fr"#localapiurl= "http://domogeek.entropialux.com"#g' apidomogeek.py
-    sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/domogeek.init -O /etc/init.d/domogeek
-    sudo chmod 755 /etc/init.d/domogeek
-    sudo systemctl enable domogeek.service
-	sudo /etc/init.d/domogeek start
-	cd
-	echo "Domogeek" >> $mytrace
-	task_end
-fi
-
-# =============================================================================================
-task_start "Install Script qualite de l'air?" "Installing Qualite de l'air"
-if [ $skip -eq 0 ]; then
-	cd
-	mkdir qair
-	cd qair
-    wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/qair/qair.bash
-	wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/qair/qair.crontab
-    sudo cp -R ../qair /var/www/html/qair
-    sudo chown -R www-data:www-data /var/www/html/qair
-    sudo cp qair.crontab /etc/cron.d/qair.crontab
-	sudo chmod +x /var/www/html/qair/qair.bash
-	sudo /var/www/html/qair/qair.bash
-	cd
-	echo "qair" >> $mytrace
-	task_end
-fi
-
-# =============================================================================================
-task_start "Install Docker ?" "Installing Docker"
-if [ $skip -eq 0 ]; then
-	cd
-    sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-	sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
-	sudo apt-get update
-	sudo apt-get install -y docker-engine
-	sudo systemctl status docker |head -12
-	cd
-	echo "Docker" >> $mytrace
-	task_end
-fi
-
-# =============================================================================================
-task_start "Install Docker mqtt-camera-ftpd ?" "Installing Docker mqtt-camera-ftpd"
-if [ $skip -eq 0 ]; then
-	cd
-	sudo docker pull stjohnjohnson/mqtt-camera-ftpd
-	sudo docker run -d --name="mqtt-camera-ftpd" -v /opt/mqtt-camera-ftpd:/config -p 21:21 stjohnjohnson/mqtt-camera-ftpd
-	sleep 2s
-	sudo sed -i -e 's/host: mqtt/host: localhost/g' /opt/mqtt-camera-ftpd/config.yml
-	sudo useradd --password `openssl passwd -1 bipbip14` camera
-	sudo docker restart mqtt-camera-ftpd
-	cd
-	echo "mqtt-camera-ftpd" >> $mytrace
-	task_end
-	# sed: impossible de lire /opt/mqtt-camera-ftpd/config.yml: Aucun fichier ou dossier de ce type
-fi
-
-# =============================================================================================
-task_start "Install Owntrack ?" "Installing Owntrack"
-if [ $skip -eq 0 ]; then
-	cd
-	mkdir owntrack
-	cd owntrack
-	curl http://repo.owntracks.org/repo.owntracks.org.gpg.key | sudo apt-key add -
-	echo "deb [arch=amd64]  http://repo.owntracks.org/debian jessie main" | sudo tee /etc/apt/sources.list.d/owntracks.list > /dev/null
-	sudo apt-get update
-	wget http://launchpadlibrarian.net/206707239/libsodium13_1.0.3-1_amd64.deb
-	sudo apt-get install ./libsodium13_1.0.3-1_amd64.deb
-	sudo apt-get install -y libsodium-dev
-	sudo apt-get install -y ot-recorder
-	sudo sed -i -e 's#\# OTR_USER=""#OTR_USER="admin"#g' /etc/default/ot-recorder
-	sudo sed -i -e 's#\# OTR_PASS=""#OTR_PASS="huup6380!"#g' /etc/default/ot-recorder
-	sudo sed -i -e 's#\# OTR_GEOKEY=""#OTR_GEOKEY="AIzaSyBCdi1b88QSDL_eUK9R7lK8VPN0rbri1ko"#g' /etc/default/ot-recorder
-	sudo sed -i -e 's#\# OTR_BROWSERAPIKEY=""#OTR_BROWSERAPIKEY="AIzaSyBCdi1b88QSDL_eUK9R7lK8VPN0rbri1ko"#g' /etc/default/ot-recorder
-	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/Owntracks/local -O /etc/rc.local
-    sudo chmod 755  /etc/rc.local
-	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/Owntracks/ot-recorder.conf  -O  /etc/apache2/conf-available/ot-recorder.conf 
-	sudo /usr/sbin/ot-recorder 'owntracks/#' &
-	sudo /usr/sbin/a2enmod proxy_http
-	sudo /usr/sbin/a2enmod proxy_wstunnel
-	sudo /usr/sbin/a2enmod proxy_html
-	sudo /usr/sbin/a2enconf ot-recorder
-	sudo /etc/init.d/apache2 restart
-	sudo mosquitto_passwd -b /etc/mosquitto/passwords poirier huup6380!
-	sudo mosquitto_passwd -b /etc/mosquitto/passwords HP huup6380!
-	sudo mosquitto_passwd -b /etc/mosquitto/passwords CP huup6380!
-	sudo /etc/init.d/mosquitto restart
-	cd
-	echo "Owntrack" >> $mytrace
-	task_end
-fi
-
-# =============================================================================================
-task_start "Install socat ?" "Installing socat"
-if [ $skip -eq 0 ]; then
-	cd
-	sudo apt-get install socat
-	sudo wget -O /etc/remote-tty.conf https://raw.githubusercontent.com/NicolasBernaerts/debian-scripts/master/remote-tty/remote-tty.conf
-	sudo wget -O /usr/local/bin/remote-tty https://raw.githubusercontent.com/NicolasBernaerts/debian-scripts/master/remote-tty/remote-tty
-	sudo chmod +x /usr/local/bin/remote-tty
-	echo "192.168.1.254;1001;ttyUSB0" | sudo tee /etc/remote-tty.conf > /dev/null
-	sudo sed -i -e 's#link=/dev/${LOCAL_TTY}#link=/dev/${LOCAL_TTY},mode=666,group=dialout#g' /usr/local/bin/remote-tty
-	sudo crontab -l -u root > /tmp/crontabroot
-	echo "*/5 * * * * root /usr/local/bin/remote-tty" >> /tmp/crontabroot
-	sudo crontab -u root /tmp/crontabroot
-	rm /tmp/crontabroot
-	cd
-	echo "socat" >> $mytrace
-	task_end
-fi
-
-# =============================================================================================
-task_start "Install Skycon.js and icons for node-red meteo?" "Installing Skycons"
-if [ $skip -eq 0 ]; then
-    cd
-    mkdir /usr/lib/node_modules/node-red/public/myjs
-    cd /usr/lib/node_modules/node-red/public/myjs
-    wget https://raw.githubusercontent.com/maxdow/skycons/master/skycons.js
-    wget https://canvas-gauges.com/download/latest/all/gauge.min.js
-    cd
-	echo "socat" >> $mytrace
-    task_end
-	
-fi
-
-
-# =============================================================================================
-task_start "Install Rgraph?" "Installing Rgraph"
-if [ $skip -eq 0 ]; then
-    cd
-	mkdir Rgraph
-    cd Rgraph
-	wget https://www.rgraph.net/downloads/RGraph4.62-stable.zip
-	unzip RGraph4.62-stable.zip
-	cd RGraph/libraries/
-	mkdir /usr/lib/node_modules/node-red/public/myjs/RGraph
-	cp * /usr/lib/node_modules/node-red/public/myjs/RGraph/
-	cd
-	echo "Rgraph" >> $mytrace
-    task_end
-fi
-
-# =============================================================================================
-task_start "Install Icones Node-red?" "Installing icones node-red"
-if [ $skip -eq 0 ]; then
-    cd
-	wget https://raw.githubusercontent.com/coyotte14/Domobox/master/icones.tgz 
-	sudo tar xvfz icones.tgz -C /var/www/html/
-	cd
-	echo "Icones" >> $mytrace
-    task_end
-fi
-
-# =============================================================================================
-task_start "Install My index HTTP?" "Installing My index HTTP"
-if [ $skip -eq 0 ]; then
-    cd
-	mkdir httpd
-    cd httpd
-	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/index.html  -O /var/www/html/index.html
-	cd
-	echo "index" >> $mytrace
-    task_end
-fi
