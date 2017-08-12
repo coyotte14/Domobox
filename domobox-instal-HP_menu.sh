@@ -269,7 +269,7 @@ printstatus "menu"
 MYMENU=$(whiptail --title "Main Non-Pi Selection" --checklist \
         "\nSelect items as required then hit OK" 31 74 24 \
         "quiet" "Quiet(er) install - untick for lots of info " ON \
-		"modpass" "Modify USER (Owntracks + Mosquitto) and ADMIN passwords (password123)" ON \
+		"modpass" "Mod USER(Owntracks + Mosquitto) and ADMIN passwords" ON \
         "nodered" "Install Node-Red modules" ON \
         "flow" "Import last Node-Red flow" ON \
         "domogeek" "Install Domogeek" ON \
