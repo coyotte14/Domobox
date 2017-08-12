@@ -346,7 +346,7 @@ if [[ $MYMENU == *"domogeek"* ]]; then
     sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/domogeek.init -O /etc/init.d/domogeek 2>&1 | tee -a $LOGFILE
     sudo chmod 755 /etc/init.d/domogeek
     sudo systemctl enable domogeek.service 2>&1 | tee -a $LOGFILE
-	sudo /etc/init.d/domogeek start 2>&1 | tee -a $LOGFILE
+	sudo /etc/init.d/domogeek start & 2>&1 | tee -a $LOGFILE
 	cd
 fi
 
@@ -452,7 +452,7 @@ if [[ $MYMENU == *"rgraph"* ]]; then
 	mkdir Rgraph
     cd Rgraph
 	wget https://www.rgraph.net/downloads/RGraph4.62-stable.zip 2>&1 | tee -a $LOGFILE
-	unzip RGraph4.62-stable.zip 2>&1 | tee -a $LOGFILE
+	unzip -qq RGraph4.62-stable.zip 2>&1 | tee -a $LOGFILE
 	cd RGraph/libraries/
 	mkdir /usr/lib/node_modules/node-red/public/myjs/RGraph
 	cp * /usr/lib/node_modules/node-red/public/myjs/RGraph/ 2>&1 | tee -a $LOGFILE
@@ -463,7 +463,7 @@ if [[ $MYMENU == *"node-red-icon"* ]]; then
     printstatus "Install Node-Red Icons"
     cd
 	wget https://raw.githubusercontent.com/coyotte14/Domobox/master/icones.tgz  2>&1 | tee -a $LOGFILE
-	sudo tar xvfz icones.tgz -C /var/www/html/ 2>&1 | tee -a $LOGFILE
+	sudo tar xfz icones.tgz -C /var/www/html/ 2>&1 | tee -a $LOGFILE
 	cd
 fi
 
