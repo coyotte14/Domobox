@@ -270,6 +270,7 @@ MYMENU=$(whiptail --title "Main Non-Pi Selection" --checklist \
         "\nSelect items as required then hit OK" 31 74 24 \
         "quiet" "Quiet(er) install - untick for lots of info " ON \
         "nodered" "Install Node-Red modules" ON \
+        "flow" "Import last Node-Red flow" ON \
         "domogeek" "Install Domogeek" ON \
         "qair" "Install script qualité de l'air " ON \
         "docker" "Install Docker" ON \
@@ -327,6 +328,13 @@ if [[ $MYMENU == *"nodered"* ]]; then
 	cd
 fi
 
+if [[ $MYMENU == *"flow"* ]]; then
+	myflow=flows_${newhostname}.json
+	echo "Import flow $myflow"
+    printstatus "Import last Node-red flow"    	
+	wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/node-red-flow/flows_Domobox.json -O /home/pi/.node-red/$myflow 2>&1 | tee -a $LOGFILE
+fi
+		 
 
 if [[ $MYMENU == *"domogeek"* ]]; then
     printstatus "Install  Domogeek"
