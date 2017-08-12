@@ -269,6 +269,7 @@ printstatus "menu"
 MYMENU=$(whiptail --title "Main Non-Pi Selection" --checklist \
         "\nSelect items as required then hit OK" 31 74 24 \
         "quiet" "Quiet(er) install - untick for lots of info " ON \
+		"modpass" "Modify USER (Owntracks + Mosquitto) and ADMIN passwords (password123)" ON \
         "nodered" "Install Node-Red modules" ON \
         "flow" "Import last Node-Red flow" ON \
         "domogeek" "Install Domogeek" ON \
@@ -297,6 +298,50 @@ fi
 cd
 printstatus "new hostname"
 newhostname=$(whiptail --inputbox "Enter new HOST name\nLeave the default value or select something new" 8 60 $newhostname 3>&1 1>&2 2>&3)
+
+
+if [[ $MYMENU == *"modpass"* ]]; then
+    
+    username=$(whiptail --inputbox "Enter a USER name (example user)\nSpecifically for Owntracks users" 8 60 $username 3>&1 1>&2 2>&3)
+    if [[ -z "${username// }" ]]; then
+        printf "No user name given - aborting\r\n"; exit
+    fi
+    
+    userpass=$(whiptail --passwordbox "Enter a user password" 8 60 3>&1 1>&2 2>&3)
+    if [[ -z "${userpass// }" ]]; then
+        printf "No user password given - aborting${BIWhite}\r\n"; exit
+    fi
+    
+    userpass2=$(whiptail --passwordbox "Confirm user password" 8 60 3>&1 1>&2 2>&3)
+    if  [ $userpass2 == "" ]; then
+        printf "${BIRed}No password confirmation given - aborting${BIWhite}\r\n"; exit
+    fi
+    if  [ $userpass != $userpass2 ]
+    then
+        printf "${BIRed}Passwords don't match - aborting${BIWhite}\r\n"; exit
+    fi
+    
+    adminname=$(whiptail --inputbox "Enter an ADMIN name (example admin)\nFor Node-Red and MQTT" 8 60 $adminname 3>&1 1>&2 2>&3)
+    if [[ -z "${adminname// }" ]]; then
+        printf "${BIRed}No admin name given - aborting${BIWhite}\r\n"
+        exit
+    fi
+    
+    adminpass=$(whiptail --passwordbox "Enter an admin password" 8 60 3>&1 1>&2 2>&3)
+    if [[ -z "${adminpass// }" ]]; then
+        printf "${BIRed}No user password given - aborting${BIWhite}\r\n"; exit
+    fi
+    
+    adminpass2=$(whiptail --passwordbox "Confirm admin password" 8 60 3>&1 1>&2 2>&3)
+    if  [ $adminpass2 == "" ]; then
+        printf "${BIRed}No password confirmation given - aborting${BIWhite}\r\n"; exit
+    fi
+    if  [ $adminpass != $adminpass2 ]; then
+        printf "${BIRed}Passwords don't match - aborting${BIWhite}\r\n"; exit
+    fi
+fi
+
+
 
 if [[ $MYMENU == *"nodered"* ]]; then
 	cd
@@ -409,7 +454,7 @@ if [[ $MYMENU == *"owntrack"* ]]; then
 	sudo apt-get install -y libsodium-dev 2>&1 | tee -a $LOGFILE
 	sudo apt-get install -y ot-recorder 2>&1 | tee -a $LOGFILE
 	sudo sed -i -e 's#\# OTR_USER=""#OTR_USER="admin"#g' /etc/default/ot-recorder
-	sudo sed -i -e 's#\# OTR_PASS=""#OTR_PASS="huup6380!"#g' /etc/default/ot-recorder
+	sudo sed -i -e 's/\# OTR_PASS=""/OTR_PASS="'"$adminpass"'"/g' /etc/default/ot-recorder
 	sudo sed -i -e 's#\# OTR_GEOKEY=""#OTR_GEOKEY="AIzaSyBCdi1b88QSDL_eUK9R7lK8VPN0rbri1ko"#g' /etc/default/ot-recorder
 	sudo sed -i -e 's#\# OTR_BROWSERAPIKEY=""#OTR_BROWSERAPIKEY="AIzaSyBCdi1b88QSDL_eUK9R7lK8VPN0rbri1ko"#g' /etc/default/ot-recorder
 	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/Owntracks/local -O /etc/rc.local 2>&1 | tee -a $LOGFILE
@@ -421,9 +466,9 @@ if [[ $MYMENU == *"owntrack"* ]]; then
 	sudo /usr/sbin/a2enmod proxy_html 2>&1 | tee -a $LOGFILE
 	sudo /usr/sbin/a2enconf ot-recorder 2>&1 | tee -a $LOGFILE
 	sudo /etc/init.d/apache2 restart 2>&1 | tee -a $LOGFILE
-	sudo mosquitto_passwd -b /etc/mosquitto/passwords poirier huup6380!
-	sudo mosquitto_passwd -b /etc/mosquitto/passwords HP huup6380!
-	sudo mosquitto_passwd -b /etc/mosquitto/passwords CP huup6380!
+	sudo mosquitto_passwd -b /etc/mosquitto/passwords poirier $adminpass
+	sudo mosquitto_passwd -b /etc/mosquitto/passwords HP $userpass
+	sudo mosquitto_passwd -b /etc/mosquitto/passwords CP $userpass
 	sudo /etc/init.d/mosquitto restart 2>&1 | tee -a $LOGFILE
 	cd
 fi
