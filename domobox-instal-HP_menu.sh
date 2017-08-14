@@ -483,7 +483,7 @@ if [[ $MYMENU == *"socat"* ]]; then
 	echo "192.168.1.254;1001;ttyUSB0" | sudo tee /etc/remote-tty.conf > /dev/null
 	sudo sed -i -e 's#link=/dev/${LOCAL_TTY}#link=/dev/${LOCAL_TTY},mode=666,group=dialout#g' /usr/local/bin/remote-tty
 	sudo crontab -l -u root > /tmp/crontabroot
-	echo "*/5 * * * * root /usr/local/bin/remote-tty" >> /tmp/crontabroot
+	echo "0,5,10,15,20,25,30,35,40,45,50,55 * * * * /usr/local/bin/remote-tty  >> /var/log/remote-tty.log 2>&1" >> /tmp/crontabroot
 	sudo crontab -u root /tmp/crontabroot
 	rm /tmp/crontabroot
 	cd
