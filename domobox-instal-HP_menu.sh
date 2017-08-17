@@ -272,6 +272,7 @@ MYMENU=$(whiptail --title "Main Non-Pi Selection" --checklist \
         "modpass" "Mod USER(Owntracks) and ADMIN passwords" ON \
         "nodered" "Install Node-Red modules" ON \
         "flow" "Import last Node-Red flow" ON \
+		"backup" "Configure Node-Red flow backup" ON \
         "domogeek" "Install Domogeek" ON \
         "qair" "Install script qualité de l'air " ON \
         "docker" "Install Docker" ON \
@@ -378,6 +379,18 @@ if [[ $MYMENU == *"flow"* ]]; then
 	echo "Import flow $myflow"
     printstatus "Import last Node-red flow"    	
 	wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/node-red-flow/flows_Domobox.json -O /home/pi/.node-red/$myflow 2>&1 | tee -a $LOGFILE
+fi
+
+if [[ $MYMENU == *"backup"* ]]; then
+    printstatus "Configure Node-red flow backup"
+    sudo mkdir /mnt/sauvegarde  2>&1 | tee -a $LOGFILE 
+	sudo chown pi:pi /mnt/sauvegarde/ | tee -a $LOGFILE
+	sudo apt-get install cifs-utils -y 2>&1 | tee -a $LOGFILE
+	echo "//192.168.1.50/sauvegarde /mnt/sauvegarde  cifs guest,_netdev 0 0" | sudo tee /etc/fstab > /dev/null 2>&1  | tee -a $LOGFILE
+	sudo mount /mnt/sauvegarde/ 2>&1 | tee -a $LOGFILE
+	git clone -q https://github.com/laurent22/rsync-time-backup | tee -a $LOGFILE
+	sudo touch "/mnt/sauvegarde/Domobox/backup.marker" | tee -a $LOGFILE
+	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/rsync-time-backup/rsync-time-backup.crontab -O /etc/cron.d/rsync-time-backup.crontab  2>&1 | tee -a $LOGFILE
 fi
 		 
 
