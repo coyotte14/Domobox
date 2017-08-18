@@ -420,8 +420,8 @@ if [[ $MYMENU == *"qair"* ]]; then
     printstatus "Install script air quality"
 	cd
     sudo mkdir /var/www/html/qair/
-	wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/qair/qair.bash -O /var/www/html/qair/qair.bash 2>&1 | tee -a $LOGFILE
-	wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/qair/qair.crontab -O /etc/cron.d/qair.crontab 2>&1 | tee -a $LOGFILE
+	sudo wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/qair/qair.bash -O /var/www/html/qair/qair.bash 2>&1 | tee -a $LOGFILE
+	sudo wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/qair/qair.crontab -O /etc/cron.d/qair.crontab 2>&1 | tee -a $LOGFILE
     sudo chown -R www-data:www-data /var/www/html/qair 
 	sudo chmod +x /var/www/html/qair/qair.bash
 	sudo /var/www/html/qair/qair.bash 2>&1 | tee -a $LOGFILE
