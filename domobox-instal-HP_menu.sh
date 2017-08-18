@@ -390,7 +390,10 @@ if [[ $MYMENU == *"backup"* ]]; then
 	sudo mount /mnt/sauvegarde/ 2>&1 | tee -a $LOGFILE
 	git clone -q https://github.com/laurent22/rsync-time-backup | tee -a $LOGFILE
 	sudo touch "/mnt/sauvegarde/Domobox/backup.marker" | tee -a $LOGFILE
-	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/rsync-time-backup/rsync-time-backup.crontab -O /etc/cron.d/rsync-time-backup.crontab  2>&1 | tee -a $LOGFILE
+	sudo crontab -l -u root > /tmp/crontabroot
+	echo "0 2 * * *  if [ -d /mnt/sauvegarde/Domobox ]; then /home/pi/rsync-time-backup/rsync_tmbackup.sh /home/pi/backup-flow/ /mnt/sauvegarde/Domobox/; fi 2>&1" >> /tmp/crontabroot
+	sudo crontab -u root /tmp/crontabroot
+	rm /tmp/crontabroot
 fi
 		 
 
@@ -421,10 +424,13 @@ if [[ $MYMENU == *"qair"* ]]; then
 	cd
     sudo mkdir /var/www/html/qair/
 	sudo wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/qair/qair.bash -O /var/www/html/qair/qair.bash 2>&1 | tee -a $LOGFILE
-	sudo wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/qair/qair.crontab -O /etc/cron.d/qair.crontab 2>&1 | tee -a $LOGFILE
-    sudo chown -R www-data:www-data /var/www/html/qair 
+	    sudo chown -R www-data:www-data /var/www/html/qair 
 	sudo chmod +x /var/www/html/qair/qair.bash
 	sudo /var/www/html/qair/qair.bash 2>&1 | tee -a $LOGFILE
+	sudo crontab -l -u root > /tmp/crontabroot
+	echo "10 11   * * *    /var/www/html/qair/qair.bash >> /var/log/qair.log 2>&1  >> /var/log/qair.log 2>&1" >> /tmp/crontabroot
+	sudo crontab -u root /tmp/crontabroot
+	rm /tmp/crontabroot
 	cd
 fi
 
