@@ -1,4 +1,4 @@
-#  /etc/cron.d/air.crontab  Script qualité air
+#  /etc/cron.d/air.crontab  Script qualite air
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
