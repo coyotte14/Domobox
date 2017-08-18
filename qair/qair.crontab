@@ -1,5 +1,0 @@
-#  /etc/cron.d/air.crontab  Script qualite air
-SHELL=/bin/sh
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-
-10 11 * * * root /var/www/html/qair/qair.bash >> /var/log/qair.log 2>&1
