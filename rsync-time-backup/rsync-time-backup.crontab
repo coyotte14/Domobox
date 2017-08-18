@@ -1,5 +1,0 @@
-#  /etc/cron.d/rsync-time-backup.crontab  Script backup Node-red flow
-SHELL=/bin/sh
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-
-0 2 * * * root if [ -d /mnt/sauvegarde/Domobox ]; then /home/pi/rsync-time-backup/rsync_tmbackup.sh /home/pi/backup-flow/ /mnt/sauvegarde/Domobox/; fi
