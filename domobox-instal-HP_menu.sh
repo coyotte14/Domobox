@@ -282,6 +282,7 @@ MYMENU=$(whiptail --title "Main Non-Pi Selection" --checklist \
         "skycon.js" "Install Skycon.js et icones meteo" OFF \
         "rgraph" "Install Rgraph" OFF \
         "node-red-icons" "Install Node-red icons" OFF \
+		"hosts" "Update /etc/hosts" OFF \
         "addindex" "Add my  index page and some CSS" ON 3>&1 1>&2 2>&3)
 
 printstatus "menu quiet ?"
@@ -552,6 +553,25 @@ sudo sed -i '/^127.0.1.1/ d' /etc/hosts > /dev/null 2>&1
 echo 127.0.1.1 $newhostname | sudo tee -a /etc/hosts > /dev/null 2>&1
 sudo /etc/init.d/hostname.sh > /dev/null 2>&1
 
+if [[ $MYMENU == *"hosts"* ]]; then
+    printstatus "Update /etc/hosts file"
+	echo 192.168.1.1	livebox | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.14	samsung-tv | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.1	decodeurtv | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.28	dietpivm | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.29	superpc | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.32	graylog | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.34	domobox | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.50	tower | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.55	vortexbox | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.70	p-garage1 | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.80	dht-veranda | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.81	dht-salon | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.100	camipfoscam | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.200	monesx | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.210	domotest | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.254	openwrt | sudo tee -a /etc/hosts > /dev/null 2>&1
+fi
 
 printstatus "All done."
 printf 'When you are happy, remove the script from the /home/pi directory.\r\n'
