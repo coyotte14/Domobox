@@ -1,4 +1,3 @@
-Fichier /etc/rc.local
 #!/bin/sh -e
 #
 # rc.local
