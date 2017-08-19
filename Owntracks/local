@@ -11,5 +11,5 @@
 #
 # By default this script does nothing.
 
-/usr/sbin/ot-recorder 'owntracks/#'
+/usr/sbin/ot-recorder 'owntracks/#' &
 exit 0
