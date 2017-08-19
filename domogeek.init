@@ -2,19 +2,19 @@
 ### BEGIN INIT INFO
 # Provides:Domogeek API
 # Description=Domogeek API
-# Required-Start:
-# Required-Stop:
+# Required-Start: $local_fs $remote_fs $syslog
+# Required-Stop:  $local_fs $remote_fs $syslog
 # Default-Start: 2 3 4 5
 # Default-Stop: 0 1 6
 ### END INIT INFO
 
 case "$1" in
   start)
-	/home/pi/domogeek/api-domogeek-master/apidomogeek.py start
+        /home/pi/domogeek/api-domogeek-master/apidomogeek.py start
         ;;
   stop)
-	/home/pi/domogeek/api-domogeek-master/apidomogeek.py stop
-	;;
+        /home/pi/domogeek/api-domogeek-master/apidomogeek.py stop
+        ;;
   reload|restart|force-reload|status)
         ;;
   *)
@@ -22,4 +22,3 @@ case "$1" in
         exit 1
         ;;
 esac
-
