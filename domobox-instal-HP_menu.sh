@@ -387,7 +387,7 @@ if [[ $MYMENU == *"backup"* ]]; then
     sudo mkdir /mnt/sauvegarde  2>&1 | tee -a $LOGFILE 
 	sudo chown pi:pi /mnt/sauvegarde/ | tee -a $LOGFILE
 	sudo apt-get install cifs-utils -y 2>&1 | tee -a $LOGFILE
-	echo "//192.168.1.50/sauvegarde /mnt/sauvegarde  cifs guest,_netdev 0 0" | sudo tee /etc/fstab > /dev/null 2>&1  | tee -a $LOGFILE
+	echo "//192.168.1.50/sauvegarde /mnt/sauvegarde  cifs guest,_netdev 0 0" | sudo tee -a /etc/fstab > /dev/null 2>&1  | tee -a $LOGFILE
 	sudo mount /mnt/sauvegarde/ 2>&1 | tee -a $LOGFILE
 	git clone -q https://github.com/laurent22/rsync-time-backup | tee -a $LOGFILE
 	sudo touch "/mnt/sauvegarde/Domobox/backup.marker" | tee -a $LOGFILE
@@ -472,8 +472,8 @@ if [[ $MYMENU == *"owntrack"* ]]; then
 	sudo apt-get install -y ot-recorder 2>&1 | tee -a $LOGFILE
 	sudo sed -i -e 's#\# OTR_USER=""#OTR_USER="admin"#g' /etc/default/ot-recorder
 	sudo sed -i -e 's/\# OTR_PASS=""/OTR_PASS="'"$adminpass"'"/g' /etc/default/ot-recorder
-	sudo sed -i -e 's#\# OTR_GEOKEY=""#OTR_GEOKEY="AIzaSyBCdi1b88QSDL_eUK9R7lK8VPN0rbri1ko"#g' /etc/default/ot-recorder
-	sudo sed -i -e 's#\# OTR_BROWSERAPIKEY=""#OTR_BROWSERAPIKEY="AIzaSyBCdi1b88QSDL_eUK9R7lK8VPN0rbri1ko"#g' /etc/default/ot-recorder
+	sudo sed -i -e 's#\# OTR_GEOKEY=""#OTR_GEOKEY="AIzaSyBHRbuNPlmqmZM8N1LeY-uvWWkz_3hXX44"#g' /etc/default/ot-recorder
+	sudo sed -i -e 's#\# OTR_BROWSERAPIKEY=""#OTR_BROWSERAPIKEY="AIzaSyBHRbuNPlmqmZM8N1LeY-uvWWkz_3hXX44"#g' /etc/default/ot-recorder
 	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/Owntracks/local -O /etc/rc.local 2>&1 | tee -a $LOGFILE
     sudo chmod 755  /etc/rc.local
 	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/Owntracks/ot-recorder.conf  -O  /etc/apache2/conf-available/ot-recorder.conf  2>&1 | tee -a $LOGFILE
