@@ -559,11 +559,12 @@ if [[ $MYMENU == *"hosts"* ]]; then
     printstatus "Update /etc/hosts file"
 	echo 192.168.1.1	livebox | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.14	samsung-tv | sudo tee -a /etc/hosts > /dev/null 2>&1
-	echo 192.168.1.1	decodeurtv | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.16	decodeurtv | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.28	dietpivm | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.29	superpc | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.32	graylog | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.34	domobox | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.36	aspirateur | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.50	tower | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.55	vortexbox | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.70	p-garage1 | sudo tee -a /etc/hosts > /dev/null 2>&1
