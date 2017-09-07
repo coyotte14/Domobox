@@ -62,11 +62,10 @@ if [ "$#" -gt 1 ]; then
 	exit
 fi
 if [ "$#" -eq 0 ]; then
-	echo "Pas de paramètres :  ville par défaut $villedefaut"
+	#echo "Pas de paramètres :  ville par défaut $villedefaut"
 	ville=$villedefaut
 fi
 ##########################################################################"
-
 
 ##########################################################################"
 ### Fichier des indices qualité de l'air prévu ce jour. Publié chaque jour à 11H
@@ -176,7 +175,8 @@ case "$indice" in
             niveau="Très mauvais"
             ;;
         *)
-            echo "Erreur: indice pollution non trouvé"
+            debugdate=$(date +%Y%m%d-%H:%M:%S)
+			echo "$debugdate  Erreur: indice pollution non trouvé"
             exit 1
 esac
 
@@ -225,8 +225,8 @@ then
 	echo "$debugdate Fin Informations debug"
 	echo "-----------------------------"
 else
-	debugdate=$(date +%Y%m%d-%H:%M:%S)
-	echo "$debugdate $ville indice pollution :  $indice"
+	debugdate=$(date +%Y-%m-%d--%H:%M:%S)
+	echo "$debugdate $ville indice pollution: $indice -- o3 : $o3  -- no2 : $no2  --  PM10 : $pm10" 
 fi
 
 ##########################################################################"
