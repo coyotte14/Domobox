@@ -429,7 +429,9 @@ if [[ $MYMENU == *"qair"* ]]; then
 	sudo chmod +x /var/www/html/qair/qair.bash
 	sudo /var/www/html/qair/qair.bash 2>&1 | tee -a $LOGFILE
 	sudo crontab -l -u root > /tmp/crontabroot
-	echo "10 11   * * *    /var/www/html/qair/qair.bash >> /var/log/qair.log 2>&1  >> /var/log/qair.log 2>&1" >> /tmp/crontabroot
+	echo "## Qualite air sur site http://www.lcsqa.org/indices-qualite-air/liste/jour" >> /tmp/crontabroot
+	echo "15 11   * * *    /var/www/html/qair/qair.bash >> /var/log/qair.log 2>&1  >> /var/log/qair.log 2>&1" >> /tmp/crontabroot
+	echo "30 12   * * *    /var/www/html/qair/qair.bash >> /var/log/qair.log 2>&1  >> /var/log/qair.log 2>&1" >> /tmp/crontabroot
 	sudo crontab -u root /tmp/crontabroot
 	rm /tmp/crontabroot
 	cd
