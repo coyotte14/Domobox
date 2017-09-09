@@ -369,9 +369,11 @@ if [[ $MYMENU == *"nodered"* ]]; then
 	npm $NQUIET install node-red-contrib-squeezebox 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install node-red-node-forecastio 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install node-red-contrib-advanced-ping 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-node-pushbullet 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install https://github.com/Averelll/node-red-contrib-rfxcom 2>&1 | tee -a $LOGFILE
 	/usr/bin/node-red-stop 2>&1 | tee -a $LOGFILE
 	/usr/bin/node-red-start & 2>&1 | tee -a $LOGFILE
+	sudo apt-get install  arp-scan -y 2>&1 | tee -a $LOGFILE
 	cd
 fi
 
