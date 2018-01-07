@@ -347,7 +347,8 @@ fi
 
 if [[ $MYMENU == *"nodered"* ]]; then
 	cd
-	printstatus "Installing Nodes"	
+	printstatus "Installing Nodes"
+	sudo chown -R pi:$(id -gn $USER) .config
 	sudo npm $NQUIET install -g node-red-admin 2>&1 | tee -a $LOGFILE
 	cd .node-red
 	sudo rm ./package.json
@@ -370,7 +371,13 @@ if [[ $MYMENU == *"nodered"* ]]; then
 	npm $NQUIET install node-red-node-forecastio 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install node-red-contrib-advanced-ping 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install node-red-node-pushbullet 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-dashboard 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-contrib-bigtimer 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install rfxcom 2>&1 | tee -a $LOGFILE
+	//npm $NQUIET install node-red-contrib-rfxcom 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install https://github.com/Averelll/node-red-contrib-rfxcom 2>&1 | tee -a $LOGFILE
+	npm outdated 2>&1 | tee -a $LOGFILE
+	npm update 2>&1 | tee -a $LOGFILE
 	/usr/bin/node-red-stop 2>&1 | tee -a $LOGFILE
 	/usr/bin/node-red-start & 2>&1 | tee -a $LOGFILE
 	sudo apt-get install  arp-scan -y 2>&1 | tee -a $LOGFILE
@@ -379,9 +386,11 @@ fi
 
 if [[ $MYMENU == *"flow"* ]]; then
 	myflow=flows_${newhostname}.json
+	myflowcred=flows_${newhostname}_cred.json
 	echo "Import flow $myflow"
     printstatus "Import last Node-red flow"    	
 	wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/node-red-flow/flows_Domobox.json -O /home/pi/.node-red/$myflow 2>&1 | tee -a $LOGFILE
+	wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/node-red-flow/flows_Domobox_cred.json -O /home/pi/.node-red/$myflowcred 2>&1 | tee -a $LOGFILE
 fi
 
 if [[ $MYMENU == *"backup"* ]]; then
@@ -507,7 +516,7 @@ if [[ $MYMENU == *"socat"* ]]; then
 	sudo sed -i -e 's#link=/dev/${LOCAL_TTY}#link=/dev/${LOCAL_TTY},mode=666,group=dialout#g' /usr/local/bin/remote-tty
 	sudo crontab -l -u root > /tmp/crontabroot
 	echo "0,5,10,15,20,25,30,35,40,45,50,55 * * * * /usr/local/bin/remote-tty  >> /var/log/remote-tty.log 2>&1" >> /tmp/crontabroot
-	echo "0 2,12 * * *  kill -15 `ps -edf | grep socat | grep -v grep | awk '{print $2}'`" >> /tmp/crontabroot
+	echo '0 2,12 * * *  kill -15 `ps -edf | grep socat | grep -v grep | awk '{print $2}'`' >> /tmp/crontabroot
 	sudo crontab -u root /tmp/crontabroot
 	rm /tmp/crontabroot
 	cd
