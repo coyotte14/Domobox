@@ -374,6 +374,8 @@ if [[ $MYMENU == *"nodered"* ]]; then
 	npm $NQUIET install node-red-node-pushbullet 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install node-red-dashboard 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install node-red-contrib-bigtimer 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-node-timeswitch 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-contrib-mi-devices 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install rfxcom 2>&1 | tee -a $LOGFILE
 	//npm $NQUIET install node-red-contrib-rfxcom 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install https://github.com/Averelll/node-red-contrib-rfxcom 2>&1 | tee -a $LOGFILE
