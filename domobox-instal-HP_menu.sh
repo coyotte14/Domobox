@@ -274,7 +274,7 @@ MYMENU=$(whiptail --title "Main Non-Pi Selection" --checklist \
         "flow" "Import last Node-Red flow" ON \
 		"backup" "Configure Node-Red flow backup" ON \
         "domogeek" "Install Domogeek" ON \
-        "qair" "Install script qualit? de l'air " ON \
+        "qair" "Install script qualité de l'air " ON \
         "docker" "Install Docker" ON \
         "mqtt-camera-ftpd" "Install mqtt-camera-ftpd" OFF \
         "owntrack" "Install Owntrack" ON \
@@ -283,7 +283,6 @@ MYMENU=$(whiptail --title "Main Non-Pi Selection" --checklist \
         "rgraph" "Install Rgraph" OFF \
         "node-red-icons" "Install Node-red icons" OFF \
 		"hosts" "Update /etc/hosts" OFF \
-		"gaz" "Add gaz conso web page" OFF \
         "addindex" "Add my  index page and some CSS" ON 3>&1 1>&2 2>&3)
 
 printstatus "menu quiet ?"
@@ -374,8 +373,6 @@ if [[ $MYMENU == *"nodered"* ]]; then
 	npm $NQUIET install node-red-node-pushbullet 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install node-red-dashboard 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install node-red-contrib-bigtimer 2>&1 | tee -a $LOGFILE
-	npm $NQUIET install node-red-node-timeswitch 2>&1 | tee -a $LOGFILE
-	npm $NQUIET install node-red-contrib-mi-devices 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install rfxcom 2>&1 | tee -a $LOGFILE
 	//npm $NQUIET install node-red-contrib-rfxcom 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install https://github.com/Averelll/node-red-contrib-rfxcom 2>&1 | tee -a $LOGFILE
@@ -401,7 +398,7 @@ if [[ $MYMENU == *"backup"* ]]; then
     sudo mkdir /mnt/sauvegarde  2>&1 | tee -a $LOGFILE 
 	sudo chown pi:pi /mnt/sauvegarde/ | tee -a $LOGFILE
 	sudo apt-get install cifs-utils -y 2>&1 | tee -a $LOGFILE
-	echo "//192.168.1.50/sauvegarde /mnt/sauvegarde  cifs guest,_netdev 0 0" | sudo tee -a /etc/fstab > /dev/null 2>&1  | tee -a $LOGFILE
+	echo "//192.168.1.50/sauvegarde /mnt/sauvegarde  cifs guest,_netdev, vers=1.0 0 0" | sudo tee -a /etc/fstab > /dev/null 2>&1  | tee -a $LOGFILE
 	sudo mount /mnt/sauvegarde/ 2>&1 | tee -a $LOGFILE
 	git clone -q https://github.com/laurent22/rsync-time-backup | tee -a $LOGFILE
 	sudo touch "/mnt/sauvegarde/Domobox/backup.marker" | tee -a $LOGFILE
@@ -553,15 +550,6 @@ if [[ $MYMENU == *"node-red-icon"* ]]; then
     cd
 	wget https://raw.githubusercontent.com/coyotte14/Domobox/master/icones.tgz  2>&1 | tee -a $LOGFILE
 	sudo tar xfz icones.tgz -C /var/www/html/ 2>&1 | tee -a $LOGFILE
-	cd
-fi
-
-if [[ $MYMENU == *"gaz"* ]]; then
-    printstatus "Install  HTTP gaz consommation page"
-    cd
-    sudo mkdir /var/www/html/gaz/
-	sudo wget --no-verbose https://raw.githubusercontent.com/coyotte14/Domobox/master/gaz/Consommation-gaz-2010-2018_fichiers/Consommation-gaz-2010-2018-v2_9519_image001.png -O /var/www/html/gaz/consogaz.png 2>&1 | tee -a $LOGFILE
-	sudo chown -R www-data:www-data /var/www/html/gaz
 	cd
 fi
 
