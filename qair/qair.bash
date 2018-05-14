@@ -70,7 +70,7 @@ fi
 ##########################################################################"
 ### Fichier des indices qualité de l'air prévu ce jour. Publié chaque jour à 11H
 date=`date +%Y-%m-%d`
-curl -s "http://www.lcsqa.org/indices-qualite-air/liste/jour" > $tmpfile
+curl -L -s "http://www.lcsqa.org/indices-qualite-air/liste/jour" > $tmpfile
 
 ##########################################################################"
 ### Construire Fichier des villes
@@ -78,15 +78,15 @@ ligneville=$(grep -n "<tbody>" $tmpfile  | cut -d: -f1)
 lignevilleend=$(grep -n "</tbody>" $tmpfile  | cut -d: -f1)
 #echo $ligneville
 #echo $lignevilleend
-pas1=7
-pas2=22
+pas1=4
+pas2=13
 ligneville=`expr $ligneville + $pas1`
 findville=`sed -n "${ligneville}p" $tmpfile | sed 's/<\/td>//g' | sed 's/ //g'`
 echo $findville > $villefile
 
 while [ $ligneville -lt $lignevilleend ]; do
 	ligneville=`expr $ligneville + $pas2`
-	findville=`sed -n "${ligneville}p" $tmpfile | sed 's/<\/td>//g' | sed 's/ //g'`
+	findville=`sed -n "${ligneville}p" $tmpfile | sed 's/<td>//g' | sed 's/<\/td>//g' | sed 's/ //g'`
 	len=${#findville}
 	if [ $len -gt 0 ]
 	then
@@ -115,21 +115,21 @@ fi
 maligne=$(grep -n $ville  $tmpfile | cut -d: -f1)
 #echo $maligne
 
-# indice qualité de l'air : 2 ligne plus bas
-maligne=`expr $maligne + 2`
-indice=`sed -n "${maligne}p" $tmpfile | sed 's/<\/td>//g' | sed 's/ //g'`
+# indice qualité de l'air : 1 ligne plus bas
+maligne=`expr $maligne + 1`
+indice=`sed -n "${maligne}p" $tmpfile | sed 's/<td>//g' | sed 's/<\/td>//g' | sed 's/ //g'`
 
-# indice O3 : 2 ligne plus bas
-maligne=`expr $maligne + 2`
-o3=`sed -n "${maligne}p" $tmpfile | sed 's/<\/td>//g' | sed 's/ //g'`
+# indice O3 : 1 ligne plus bas
+maligne=`expr $maligne + 1`
+o3=`sed -n "${maligne}p" $tmpfile | sed 's/<td>//g' | sed 's/<\/td>//g' | sed 's/ //g'`
 
-# indice NO2 : 2 ligne plus bas
-maligne=`expr $maligne + 2`
-no2=`sed -n "${maligne}p" $tmpfile | sed 's/<\/td>//g' | sed 's/ //g'`
+# indice NO2 : 1 ligne plus bas
+maligne=`expr $maligne + 1`
+no2=`sed -n "${maligne}p" $tmpfile | sed 's/<td>//g' | sed 's/<\/td>//g' | sed 's/ //g'`
 
-# indice PM10 : 2 ligne plus bas
-maligne=`expr $maligne + 2`
-pm10=`sed -n "${maligne}p" $tmpfile | sed 's/<\/td>//g' | sed 's/ //g'`
+# indice PM10 : 1 ligne plus bas
+maligne=`expr $maligne + 1`
+pm10=`sed -n "${maligne}p" $tmpfile | sed 's/<td>//g' | sed 's/<\/td>//g' | sed 's/ //g'`
 
 ##########################################################################"
 ### Niveau pollution
