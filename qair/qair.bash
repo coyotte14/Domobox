@@ -81,7 +81,7 @@ lignevilleend=$(grep -n "</tbody>" $tmpfile  | cut -d: -f1)
 pas1=4
 pas2=13
 ligneville=`expr $ligneville + $pas1`
-findville=`sed -n "${ligneville}p" $tmpfile | sed 's/<\/td>//g' | sed 's/ //g'`
+findville=`sed -n "${ligneville}p" $tmpfile | sed 's/<td>//g' | sed 's/<\/td>//g' | sed 's/ //g'`
 echo $findville > $villefile
 
 while [ $ligneville -lt $lignevilleend ]; do
@@ -192,7 +192,7 @@ echo $indice > $txtfile
 
 ##########################################################################"
 ###xml file
-echo "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>" > $xmlfile
+echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>" > $xmlfile
 echo "<data>" >> $xmlfile
 echo "<date>$date</date>" >> $xmlfile
 echo "<ville>$ville</ville>" >> $xmlfile
