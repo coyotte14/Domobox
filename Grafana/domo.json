@@ -41,12 +41,12 @@
       },
       "dateSettings": {
         "dateFormat": "DD MMMM YYYY",
-        "fontSize": "20px",
+        "fontSize": "18px",
         "fontWeight": "normal",
         "showDate": true
       },
       "gridPos": {
-        "h": 7,
+        "h": 3,
         "w": 6,
         "x": 0,
         "y": 1
@@ -80,14 +80,29 @@
       "type": "text"
     },
     {
-      "content": "\n<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\" />\n\n<style type=\"text/css\">\n\n#MonStyle{\nbackground: white;\ntext-align: center;\nmargin-top: 0px;\nmargin-right: 100px;\nfont: bold 44px arial, sans-serif; \nwidth: 100%;\npadding: 0px;\nborder-spacing: 0px;\nposition: absolute;\noverflow: hidden;\nheight: 120px;\nletter-spacing: 3px;\n}\n\n.class-color-pink {\n  color:deeppink;\n}\n.class-color-red {\n  color:#c70000;\n}\n.class-color-white {\n  color:white;\n}\n.class-color-purple {\n  color:#470505;\n}\n\n</style>\n</head>\n<body>\n<div id=\"MonStyle\">\n<h2 class=\"class-color-red\">Saint</h2>\n<iframe frameborder=\"0\" class=\"class-color-red\" src =\"http://192.168.1.34:81/feastedsaint/now\"\n</div>\n</body>\n</iframe>\n</html>",
+      "content": "\n<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\" />\n\n<style type=\"text/css\">\n\n#MonStyle{\nbackground: white;\ntext-align: center;\nmargin-top: 0px;\nmargin-right: 100px;\nfont: bold 44px arial, sans-serif; \nwidth: 100%;\npadding: 0px;\nborder-spacing: 0px;\nposition: absolute;\noverflow: hidden;\nheight: 120px;\nletter-spacing: 3px;\n}\n\n.class-color-pink {\n  color:deeppink;\n}\n.class-color-red {\n  color:#c70000;\n}\n.class-color-white {\n  color:white;\n}\n.class-color-purple {\n  color:#470505;\n}\n\n</style>\n</head>\n<body>\n<div id=\"MonStyle\">\n<h2 class=\"class-color-red\">Saint</h2>\n<iframe frameborder=\"0\" class=\"class-color-red\" src =\"http://192.168.1.30:81/feastedsaint/now\"\n</div>\n</body>\n</iframe>\n</html>",
       "gridPos": {
         "h": 4,
         "w": 6,
         "x": 0,
-        "y": 8
+        "y": 4
       },
       "id": 34,
+      "links": [],
+      "mode": "html",
+      "title": "",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "content": "<script>\n  var callbackFunction = function(data) {\n    \n    //import time\n    //T = time.strptime(\"05:42PM\", \"%I:%M%p\")\n    //hour, minutes = T.tm_hour, T.tm_min\n    //print(\"{0}:{1}\".format(hour, minutes))\n\n    var wind = data.query.results.channel.wind;    \n    //alert(wind.chill);\n    $(\"#myWindspeed\").text(wind.speed.slice(0, -3)) ;\n\n   var astronomy = data.query.results.channel.astronomy;\n    $(\"#mySunrise\").text(astronomy.sunrise) ;\n\n    $(\"#mySunset\").text(astronomy.sunset) ;\n\n   var condition = data.query.results.channel.item.condition;\n   $(\"#myTemperature\").text(condition.temp) ;\n  };\n</script>\n<script src=\"https://query.yahooapis.com/v1/public/yql?q=select item, condition, wind, astronomy from weather.forecast where woeid = 623598 and u='c'&format=json&callback=callbackFunction\"></script>\n\n\n<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\" />\n\n<style type=\"text/css\">\n\n#Style{\n\nbackground: #470505;\ntext-align: center;\nmargin-top: 0px;\nfont: bold 16px arial, sans-serif;\n width: 100%;\n padding: 0px; \n border-spacing: 0px; \n}\n\n.tabcenter{\n   margin-left:auto;\n   margin-right:auto;\n   text-align: left;\n}\n\n</style>\n</head>\n<body>\n<div id=\"Style\">Météo Internet\n\n<table id=\"MaTable\" class=\"tabcenter\">\n  <tr>\n    <td width=\"50%\">Temperature</td><td><span id=\"myTemperature\" /> &deg;C</td>\n  </tr>\n  <tr>\n    <td>Lever soleil</td><td><span id=\"mySunrise\" /></td>\n  </tr>\n  <tr>\n   <td>Coucher soleil</td> <td><span id=\"mySunset\" /></td>\n  </tr>\n    <td>Vent</td> <td> <span id=\"myWindspeed\" /> km/h</td>\n  </tr>\n</table>\n</div>\n</body>\n</html>",
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 8
+      },
+      "id": 37,
       "links": [],
       "mode": "html",
       "title": "",
@@ -189,7 +204,7 @@
           "timeField": "date"
         }
       ],
-      "thresholds": "10,20,40",
+      "thresholds": "10,25",
       "timeFrom": null,
       "timeShift": null,
       "title": "Extérieur T°",
@@ -210,7 +225,7 @@
       "colorBackground": true,
       "colorValue": false,
       "colors": [
-        "#299c46",
+        "#0a437c",
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
@@ -234,7 +249,7 @@
       "links": [
         {
           "dashUri": "db/rez-de-chaussee",
-          "dashboard": "Rez-de-chaussée",
+          "dashboard": "Rez-de-chauss��e",
           "title": "Rez-de-chaussée",
           "type": "dashboard"
         }
@@ -299,8 +314,8 @@
           "timeField": "date"
         }
       ],
-      "thresholds": "15,25,30",
-      "title": "Rez-de-chaussée",
+      "thresholds": "15,20,27",
+      "title": "Rez-de-chaussée T°",
       "type": "singlestat",
       "valueFontSize": "200%",
       "valueMaps": [
@@ -535,26 +550,11 @@
       "valueName": "last_time"
     },
     {
-      "content": "<script>\n  var callbackFunction = function(data) {\n    \n    //import time\n    //T = time.strptime(\"05:42PM\", \"%I:%M%p\")\n    //hour, minutes = T.tm_hour, T.tm_min\n    //print(\"{0}:{1}\".format(hour, minutes))\n\n    var wind = data.query.results.channel.wind;    \n    //alert(wind.chill);\n    $(\"#myWindspeed\").text(wind.speed.slice(0, -3)) ;\n\n   var astronomy = data.query.results.channel.astronomy;\n    $(\"#mySunrise\").text(astronomy.sunrise) ;\n\n    $(\"#mySunset\").text(astronomy.sunset) ;\n\n   var condition = data.query.results.channel.item.condition;\n   $(\"#myTemperature\").text(condition.temp) ;\n  };\n</script>\n<script src=\"https://query.yahooapis.com/v1/public/yql?q=select item, condition, wind, astronomy from weather.forecast where woeid = 623598 and u='c'&format=json&callback=callbackFunction\"></script>\n\n\n<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\" />\n\n<style type=\"text/css\">\n\n#Style{\n\nbackground: #470505;\ntext-align: center;\nmargin-top: 0px;\nfont: bold 16px arial, sans-serif;\n width: 100%;\n padding: 0px; \n border-spacing: 0px; \n}\n\n.tabcenter{\n   margin-left:auto;\n   margin-right:auto;\n   text-align: left;\n}\n\n</style>\n</head>\n<body>\n<div id=\"Style\">Météo Internet\n\n<table id=\"MaTable\" class=\"tabcenter\">\n  <tr>\n    <td width=\"50%\">Temperature</td><td><span id=\"myTemperature\" /> &deg;C</td>\n  </tr>\n  <tr>\n    <td>Lever soleil</td><td><span id=\"mySunrise\" /></td>\n  </tr>\n  <tr>\n   <td>Coucher soleil</td> <td><span id=\"mySunset\" /></td>\n  </tr>\n    <td>Vent</td> <td> <span id=\"myWindspeed\" /> km/h</td>\n  </tr>\n</table>\n</div>\n</body>\n</html>",
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 0,
-        "y": 12
-      },
-      "id": 37,
-      "links": [],
-      "mode": "html",
-      "title": "",
-      "transparent": true,
-      "type": "text"
-    },
-    {
       "cacheTimeout": null,
       "colorBackground": true,
       "colorValue": false,
       "colors": [
-        "#299c46",
+        "#0a437c",
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
@@ -645,7 +645,7 @@
           "timeField": "date"
         }
       ],
-      "thresholds": "15,25,30",
+      "thresholds": "15,20,27",
       "title": "Véranda T°",
       "type": "singlestat",
       "valueFontSize": "200%",
@@ -663,7 +663,7 @@
       "colorBackground": true,
       "colorValue": false,
       "colors": [
-        "#299c46",
+        "#0a437c",
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
@@ -754,7 +754,7 @@
           "timeField": "date"
         }
       ],
-      "thresholds": "15,25",
+      "thresholds": "15,20,27",
       "title": "Etage T°",
       "type": "singlestat",
       "valueFontSize": "200%",
@@ -879,6 +879,29 @@
       "valueName": "last_time"
     },
     {
+      "dashboardFilter": "",
+      "dashboardTags": [],
+      "folderId": null,
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 14
+      },
+      "id": 39,
+      "limit": 10,
+      "links": [],
+      "nameFilter": "",
+      "onlyAlertsOnDashboard": false,
+      "show": "current",
+      "sortOrder": 1,
+      "stateFilter": [
+        "alerting"
+      ],
+      "title": "Alertes",
+      "type": "alertlist"
+    },
+    {
       "cacheTimeout": null,
       "colorBackground": true,
       "colorValue": false,
@@ -936,6 +959,117 @@
         {
           "from": "0",
           "text": "Caméra",
+          "to": "999999999999999"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "date",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "My-Temperature",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "max"
+            }
+          ],
+          "query": "source=\"T-Extérieur\"",
+          "refId": "A",
+          "timeField": "date"
+        }
+      ],
+      "thresholds": "0,10",
+      "timeFrom": null,
+      "title": "",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "Caméra",
+          "value": "any"
+        }
+      ],
+      "valueName": "last_time"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "rgb(71, 5, 5)"
+      ],
+      "datasource": "ElasticSearch",
+      "format": "none",
+      "gauge": {
+        "maxValue": 10,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 6,
+        "y": 16
+      },
+      "id": 41,
+      "interval": null,
+      "links": [
+        {
+          "dashUri": "db/alertes",
+          "dashboard": "Alertes",
+          "includeVars": false,
+          "keepTime": false,
+          "title": "Alertes",
+          "type": "dashboard"
+        }
+      ],
+      "mappingType": 2,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "0",
+          "text": "Alertes",
           "to": "999999999999999"
         }
       ],
@@ -1233,6 +1367,8 @@
       "30m",
       "1h",
       "2h",
+      "6h",
+      "12h",
       "1d"
     ],
     "time_options": [

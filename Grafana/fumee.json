@@ -18,227 +18,28 @@
   "links": [],
   "panels": [
     {
-      "content": "<iframe width=\"600\" height=\"590\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\"src=\"http://domobox:1880/ui/#/7\"></iframe>",
-      "gridPos": {
-        "h": 16,
-        "w": 16,
-        "x": 0,
-        "y": 0
-      },
-      "id": 4,
-      "links": [],
-      "mode": "html",
-      "title": "",
-      "type": "text"
-    },
-    {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
+      "colorBackground": true,
+      "colorValue": false,
       "colors": [
-        "#65c5db",
-        "rgba(239, 128, 37, 0.89)",
-        "rgba(245, 54, 54, 0.9)"
+        "#299c46",
+        "#890f02",
+        "#d44a3a"
       ],
-      "datasource": null,
-      "description": "",
+      "datasource": "ElasticSearch",
       "format": "none",
-      "gauge": {
-        "maxValue": 40,
-        "minValue": -10,
-        "show": true,
-        "thresholdLabels": true,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 16,
-        "y": 0
-      },
-      "id": 7,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "20%",
-      "prefix": "",
-      "prefixFontSize": "20%",
-      "rangeMaps": [],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "bucketAggs": [
-            {
-              "field": "date",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "dsType": "elasticsearch",
-          "hide": false,
-          "metrics": [
-            {
-              "field": "My-Temperature",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "query": "source=\"T-Extérieur\"",
-          "refId": "A",
-          "timeField": "date"
-        }
-      ],
-      "thresholds": "10,20",
-      "timeFrom": null,
-      "title": "Température extérieure",
-      "type": "singlestat",
-      "valueFontSize": "50%",
-      "valueMaps": [],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "rgba(5, 191, 21, 0.97)",
-        "rgba(239, 128, 37, 0.89)",
-        "rgba(245, 54, 54, 0.9)"
-      ],
-      "datasource": null,
-      "description": "",
-      "format": "percent",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
-        "show": true,
-        "thresholdLabels": true,
+        "show": false,
+        "thresholdLabels": false,
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 16,
-        "y": 5
-      },
-      "id": 8,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "20%",
-      "prefix": "",
-      "prefixFontSize": "20%",
-      "rangeMaps": [],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "bucketAggs": [
-            {
-              "field": "date",
-              "id": "2",
-              "settings": {
-                "interval": "auto",
-                "min_doc_count": 0,
-                "trimEdges": 0
-              },
-              "type": "date_histogram"
-            }
-          ],
-          "dsType": "elasticsearch",
-          "hide": false,
-          "metrics": [
-            {
-              "field": "My-Humidity",
-              "id": "1",
-              "meta": {},
-              "settings": {},
-              "type": "max"
-            }
-          ],
-          "query": "source=\"T-Etage\"",
-          "refId": "A",
-          "timeField": "date"
-        }
-      ],
-      "thresholds": "30,60",
-      "timeFrom": null,
-      "title": "Humidité intérieure",
-      "type": "singlestat",
-      "valueFontSize": "50%",
-      "valueMaps": [],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": true,
-      "colors": [
-        "rgba(5, 191, 21, 0.97)",
-        "rgba(239, 128, 37, 0.89)",
-        "rgba(245, 54, 54, 0.9)"
-      ],
-      "datasource": null,
-      "description": "",
-      "format": "none",
-      "gauge": {
-        "maxValue": 10,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": true,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 16,
-        "y": 10
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 0
       },
       "hideTimeOverride": true,
       "id": 6,
@@ -259,10 +60,16 @@
       "nullPointMode": "connected",
       "nullText": null,
       "postfix": "",
-      "postfixFontSize": "20%",
+      "postfixFontSize": "50%",
       "prefix": "",
-      "prefixFontSize": "20%",
-      "rangeMaps": [],
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
       "sparkline": {
         "fillColor": "rgba(31, 118, 189, 0.18)",
         "full": false,
@@ -284,85 +91,145 @@
               "type": "date_histogram"
             }
           ],
-          "dsType": "elasticsearch",
-          "hide": false,
           "metrics": [
             {
-              "field": "qualite-air",
+              "field": "status",
               "id": "1",
               "meta": {},
               "settings": {},
               "type": "max"
             }
           ],
-          "query": "source:air",
+          "query": "source:Smoke-Couloir",
           "refId": "A",
           "timeField": "date"
         }
       ],
-      "thresholds": "4,7",
+      "thresholds": "1,5",
       "timeFrom": "1d",
-      "title": "Quailté air",
+      "title": "Détecteur fumée couloir",
       "type": "singlestat",
-      "valueFontSize": "50%",
+      "valueFontSize": "80%",
       "valueMaps": [
         {
           "op": "=",
-          "text": "N/A",
-          "value": "null"
+          "text": "Couloir : pas de fumée détectée",
+          "value": "0"
         },
         {
           "op": "=",
-          "text": "Très bon",
+          "text": "Couloir : fumée détectée",
           "value": "1"
-        },
-        {
-          "op": "=",
-          "text": "Très bon",
-          "value": "2"
-        },
-        {
-          "op": "=",
-          "text": "Bon",
-          "value": "3"
-        },
-        {
-          "op": "=",
-          "text": "Bon",
-          "value": "4"
-        },
-        {
-          "op": "=",
-          "text": "Moyen",
-          "value": "5"
-        },
-        {
-          "op": "=",
-          "text": "Médiocre",
-          "value": "6"
-        },
-        {
-          "op": "=",
-          "text": "Médiocre",
-          "value": "7"
-        },
-        {
-          "op": "=",
-          "text": "Mauvais",
-          "value": "8"
-        },
-        {
-          "op": "=",
-          "text": "Mauvais",
-          "value": "9"
-        },
-        {
-          "op": "=",
-          "text": "Très mauvais",
-          "value": "10"
         }
       ],
-      "valueName": "current"
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "#890f02",
+        "#d44a3a"
+      ],
+      "datasource": "ElasticSearch",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "hideTimeOverride": true,
+      "id": 7,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "date",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "status",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "max"
+            }
+          ],
+          "query": "source:Smoke-Palier",
+          "refId": "A",
+          "timeField": "date"
+        }
+      ],
+      "thresholds": "1,5",
+      "timeFrom": "1d",
+      "title": "Détecteur fumée palier",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "Palier : pas de fumée détectée",
+          "value": "0"
+        },
+        {
+          "op": "=",
+          "text": "Palier : fumée détectée",
+          "value": "1"
+        }
+      ],
+      "valueName": "avg"
     },
     {
       "cacheTimeout": null,
@@ -383,10 +250,94 @@
         "thresholdMarkers": false
       },
       "gridPos": {
-        "h": 3,
-        "w": 4,
+        "h": 5,
+        "w": 6,
         "x": 0,
-        "y": 16
+        "y": 7
+      },
+      "id": 4,
+      "interval": null,
+      "links": [
+        {
+          "dashUri": "db/divers",
+          "dashboard": "Divers",
+          "includeVars": false,
+          "keepTime": false,
+          "title": "Divers",
+          "type": "dashboard"
+        }
+      ],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeat": null,
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [],
+      "thresholds": "",
+      "title": "",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "170%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "Divers",
+          "value": "null"
+        }
+      ],
+      "valueName": "last_time"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": null,
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": true,
+        "thresholdLabels": false,
+        "thresholdMarkers": false
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 12
       },
       "id": 2,
       "interval": null,
@@ -485,6 +436,6 @@
     ]
   },
   "timezone": "",
-  "title": "VMC",
-  "uid": "5w4hFWAmk"
+  "title": "Fumée",
+  "uid": "CKwSssJiz"
 }

@@ -25,7 +25,7 @@
       "color": {
         "cardColor": "rgb(0, 75, 255)",
         "colorScale": "linear",
-        "colorScheme": "interpolateGreens",
+        "colorScheme": "interpolateBlues",
         "exponent": 0.5,
         "max": null,
         "min": null,
@@ -35,7 +35,7 @@
       "datasource": "ElasticSearch",
       "description": "0 : Absent\n1 : Présent",
       "gridPos": {
-        "h": 10,
+        "h": 7,
         "w": 24,
         "x": 0,
         "y": 0
@@ -80,9 +80,10 @@
       ],
       "title": "Présence maison",
       "tooltip": {
-        "show": true,
+        "show": false,
         "showHistogram": false
       },
+      "tooltipDecimals": null,
       "type": "heatmap",
       "xAxis": {
         "show": true
@@ -90,7 +91,7 @@
       "xBucketNumber": null,
       "xBucketSize": "",
       "yAxis": {
-        "decimals": null,
+        "decimals": 1,
         "format": "short",
         "logBase": 1,
         "max": "1.1",
@@ -101,6 +102,20 @@
       "yBucketBound": "auto",
       "yBucketNumber": null,
       "yBucketSize": null
+    },
+    {
+      "content": "<iframe width=\"950\" height=\"300\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\"src=\"http://domobox/owntracks/\"></iframe>",
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 10,
+      "links": [],
+      "mode": "html",
+      "title": "",
+      "type": "text"
     },
     {
       "cacheTimeout": null,
@@ -124,7 +139,7 @@
         "h": 3,
         "w": 4,
         "x": 0,
-        "y": 10
+        "y": 15
       },
       "id": 2,
       "interval": null,

@@ -489,11 +489,11 @@
       "interval": null,
       "links": [
         {
-          "dashUri": "db/batteries",
-          "dashboard": "Batteries",
+          "dashUri": "db/fumee",
+          "dashboard": "Fumée",
           "includeVars": false,
           "keepTime": false,
-          "title": "Batteries",
+          "title": "Fumée",
           "type": "dashboard"
         }
       ],
@@ -519,6 +519,117 @@
         {
           "from": "0",
           "text": "Détecteur fumée",
+          "to": "999999999999999"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "date",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "My-Temperature",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "max"
+            }
+          ],
+          "query": "source=\"T-Extérieur\"",
+          "refId": "A",
+          "timeField": "date"
+        }
+      ],
+      "thresholds": "0,10",
+      "timeFrom": null,
+      "title": "",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "Caméra",
+          "value": "any"
+        }
+      ],
+      "valueName": "last_time"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": [
+        "#d44a3a",
+        "rgba(237, 129, 40, 0.89)",
+        "rgb(71, 5, 5)"
+      ],
+      "datasource": "ElasticSearch",
+      "format": "none",
+      "gauge": {
+        "maxValue": 10,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 3
+      },
+      "id": 9,
+      "interval": null,
+      "links": [
+        {
+          "dashUri": "db/alertes",
+          "dashboard": "Alertes",
+          "includeVars": false,
+          "keepTime": false,
+          "title": "Alertes",
+          "type": "dashboard"
+        }
+      ],
+      "mappingType": 2,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "0",
+          "text": "Alertes",
           "to": "999999999999999"
         }
       ],

@@ -771,7 +771,7 @@
         "y": 8
       },
       "hideTimeOverride": true,
-      "id": 12,
+      "id": 26,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -835,7 +835,7 @@
         }
       ],
       "thresholds": "15,25,50",
-      "timeFrom": "30d",
+      "timeFrom": "7d",
       "title": "Extérieur T° Max du mois",
       "type": "singlestat",
       "valueFontSize": "170%",
@@ -1036,6 +1036,267 @@
     },
     {
       "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": [
+        "#508642",
+        "#e24d42",
+        "#d44a3a"
+      ],
+      "datasource": "ElasticSearch",
+      "format": "celsius",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 12
+      },
+      "hideTimeOverride": true,
+      "id": 12,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "date",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "risk",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "max"
+            }
+          ],
+          "query": "source:vigilanceMeteo",
+          "refId": "A",
+          "timeField": "date"
+        }
+      ],
+      "thresholds": "0.5,0.9",
+      "timeFrom": "1h",
+      "title": "",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "Pas d'alerte météo",
+          "value": "0"
+        },
+        {
+          "op": "=",
+          "text": "Attention : vigilance météo",
+          "value": "1"
+        },
+        {
+          "op": "=",
+          "text": "Pas d'alerte météo",
+          "value": "null"
+        }
+      ],
+      "valueName": "max"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "rgba(5, 191, 21, 0.97)",
+        "rgba(239, 128, 37, 0.89)",
+        "rgba(245, 54, 54, 0.9)"
+      ],
+      "datasource": null,
+      "description": "",
+      "format": "none",
+      "gauge": {
+        "maxValue": 10,
+        "minValue": 0,
+        "show": true,
+        "thresholdLabels": true,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 12,
+        "y": 12
+      },
+      "hideTimeOverride": true,
+      "id": 25,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "20%",
+      "prefix": "",
+      "prefixFontSize": "20%",
+      "rangeMaps": [],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "date",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "dsType": "elasticsearch",
+          "hide": false,
+          "metrics": [
+            {
+              "field": "qualite-air",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "max"
+            }
+          ],
+          "query": "source:air",
+          "refId": "A",
+          "timeField": "date"
+        }
+      ],
+      "thresholds": "4,7",
+      "timeFrom": "1d",
+      "title": "Quailté air",
+      "type": "singlestat",
+      "valueFontSize": "50%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        },
+        {
+          "op": "=",
+          "text": "Très bon",
+          "value": "1"
+        },
+        {
+          "op": "=",
+          "text": "Très bon",
+          "value": "2"
+        },
+        {
+          "op": "=",
+          "text": "Bon",
+          "value": "3"
+        },
+        {
+          "op": "=",
+          "text": "Bon",
+          "value": "4"
+        },
+        {
+          "op": "=",
+          "text": "Moyen",
+          "value": "5"
+        },
+        {
+          "op": "=",
+          "text": "Médiocre",
+          "value": "6"
+        },
+        {
+          "op": "=",
+          "text": "Médiocre",
+          "value": "7"
+        },
+        {
+          "op": "=",
+          "text": "Mauvais",
+          "value": "8"
+        },
+        {
+          "op": "=",
+          "text": "Mauvais",
+          "value": "9"
+        },
+        {
+          "op": "=",
+          "text": "Très mauvais",
+          "value": "10"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
       "colorBackground": false,
       "colorValue": true,
       "colors": [
@@ -1173,6 +1434,118 @@
         }
       ],
       "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": [
+        "#508642",
+        "#e24d42",
+        "#d44a3a"
+      ],
+      "datasource": "ElasticSearch",
+      "format": "celsius",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 15
+      },
+      "hideTimeOverride": true,
+      "id": 27,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "bucketAggs": [
+            {
+              "field": "date",
+              "id": "2",
+              "settings": {
+                "interval": "20m",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "inondation",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "max"
+            }
+          ],
+          "query": "source:vigilanceMeteo",
+          "refId": "A",
+          "timeField": "date"
+        }
+      ],
+      "thresholds": "0.5,0.9",
+      "timeFrom": "1h",
+      "title": "",
+      "type": "singlestat",
+      "valueFontSize": "100%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "Pas d'alerte inondation",
+          "value": "0"
+        },
+        {
+          "op": "=",
+          "text": "Attention : alerte inondation",
+          "value": "1"
+        },
+        {
+          "op": "=",
+          "text": "Pas d'alerte inondation",
+          "value": "null"
+        }
+      ],
+      "valueName": "max"
     }
   ],
   "schemaVersion": 16,

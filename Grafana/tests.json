@@ -18,25 +18,17 @@
   "links": [],
   "panels": [
     {
-      "dashboardFilter": "Batterie",
-      "dashboardTags": [],
-      "folderId": null,
+      "content": "<img src=\"https://fakeimg.pl/350x200/?text=Hello\">\n<img src=https://ipsumimage.appspot.com/320x100,ff7700?l=Indice%20UV|%205%20>\n<img src=https://dummyimage.com/600x400/4286f4/105&text=toto>\n<a href=\"https://imgplaceholder.com\"><img src=\"https://imgplaceholder.com/420x320/cccccc/db7070/glyphicon-map-marker?text=indice+uv\" alt=\"ImgPlaceholder\"></a>\n",
       "gridPos": {
-        "h": 6,
-        "w": 9,
+        "h": 26,
+        "w": 11,
         "x": 0,
         "y": 0
       },
-      "id": 10,
-      "limit": 10,
-      "links": [],
-      "nameFilter": "",
-      "onlyAlertsOnDashboard": false,
-      "show": "current",
-      "sortOrder": 1,
-      "stateFilter": [],
-      "title": "Alertes",
-      "type": "alertlist"
+      "id": 6,
+      "mode": "html",
+      "title": "Panel Title",
+      "type": "text"
     },
     {
       "cacheTimeout": null,
@@ -125,8 +117,8 @@
     {
       "datasource": "default",
       "gridPos": {
-        "h": 8,
-        "w": 4,
+        "h": 9,
+        "w": 5,
         "x": 18,
         "y": 0
       },
@@ -236,19 +228,6 @@
         }
       ],
       "valueName": "last_time"
-    },
-    {
-      "content": "<img src=\"https://fakeimg.pl/350x200/?text=Hello\">\n<img src=https://ipsumimage.appspot.com/320x100,ff7700?l=Indice%20UV|%205%20>\n<img src=https://dummyimage.com/600x400/4286f4/105&text=toto>\n<a href=\"https://imgplaceholder.com\"><img src=\"https://imgplaceholder.com/420x320/cccccc/db7070/glyphicon-map-marker?text=indice+uv\" alt=\"ImgPlaceholder\"></a>\n",
-      "gridPos": {
-        "h": 26,
-        "w": 11,
-        "x": 0,
-        "y": 6
-      },
-      "id": 6,
-      "mode": "html",
-      "title": "Panel Title",
-      "type": "text"
     }
   ],
   "schemaVersion": 16,
