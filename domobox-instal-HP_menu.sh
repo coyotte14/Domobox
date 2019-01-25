@@ -273,9 +273,9 @@ MYMENU=$(whiptail --title "Main Non-Pi Selection" --checklist \
         "nodered" "Install Node-Red modules" ON \
         "flow" "Import last Node-Red flow" ON \
 		"backup" "Configure Node-Red flow backup" ON \
-        "domogeek" "Install Domogeek" ON \
+        "domogeek" "Install Domogeek" OFF \
         "qair" "Install script qualité de l'air " ON \
-        "docker" "Install Docker" ON \
+        "docker" "Install Docker" OFF \
         "mqtt-camera-ftpd" "Install mqtt-camera-ftpd" OFF \
         "owntrack" "Install Owntrack" ON \
         "socat" "Install Socat)" ON \
@@ -374,8 +374,8 @@ if [[ $MYMENU == *"nodered"* ]]; then
 	npm $NQUIET install node-red-dashboard 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install node-red-contrib-bigtimer 2>&1 | tee -a $LOGFILE
 	npm $NQUIET install rfxcom 2>&1 | tee -a $LOGFILE
-	//npm $NQUIET install node-red-contrib-rfxcom 2>&1 | tee -a $LOGFILE
-	npm $NQUIET install https://github.com/Averelll/node-red-contrib-rfxcom 2>&1 | tee -a $LOGFILE
+	npm $NQUIET install node-red-contrib-rfxcom 2>&1 | tee -a $LOGFILE
+	//npm $NQUIET install https://github.com/Averelll/node-red-contrib-rfxcom 2>&1 | tee -a $LOGFILE
 	npm outdated 2>&1 | tee -a $LOGFILE
 	npm update 2>&1 | tee -a $LOGFILE
 	/usr/bin/node-red-stop 2>&1 | tee -a $LOGFILE
@@ -398,7 +398,7 @@ if [[ $MYMENU == *"backup"* ]]; then
     sudo mkdir /mnt/sauvegarde  2>&1 | tee -a $LOGFILE 
 	sudo chown pi:pi /mnt/sauvegarde/ | tee -a $LOGFILE
 	sudo apt-get install cifs-utils -y 2>&1 | tee -a $LOGFILE
-	echo "//192.168.1.50/sauvegarde /mnt/sauvegarde  cifs guest,_netdev, vers=1.0 0 0" | sudo tee -a /etc/fstab > /dev/null 2>&1  | tee -a $LOGFILE
+	echo "//192.168.1.50/sauvegarde /mnt/sauvegarde  cifs guest,_netdev 0 0" | sudo tee -a /etc/fstab > /dev/null 2>&1  | tee -a $LOGFILE
 	sudo mount /mnt/sauvegarde/ 2>&1 | tee -a $LOGFILE
 	git clone -q https://github.com/laurent22/rsync-time-backup | tee -a $LOGFILE
 	sudo touch "/mnt/sauvegarde/Domobox/backup.marker" | tee -a $LOGFILE
@@ -519,6 +519,7 @@ if [[ $MYMENU == *"socat"* ]]; then
 	echo '0 2,12 * * *  kill -15 `ps -edf | grep socat | grep -v grep | awk '{print $2}'`' >> /tmp/crontabroot
 	sudo crontab -u root /tmp/crontabroot
 	rm /tmp/crontabroot
+	sudo wget https://raw.githubusercontent.com/coyotte14/Domobox/master/socat/soca-restart.sh -O /home/pi/soca-restart.sh  2>&1 | tee -a $LOGFILE
 	cd
 fi
 
@@ -576,15 +577,21 @@ if [[ $MYMENU == *"hosts"* ]]; then
 	echo 192.168.1.16	decodeurtv | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.28	dietpivm | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.29	superpc | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.30	rancheros | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.32	graylog | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.34	domobox | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.36	aspirateur | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.50	tower | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.55	vortexbox | sudo tee -a /etc/hosts > /dev/null 2>&1
-	echo 192.168.1.70	p-garage1 | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.70	sonoff-tablette | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.72	sonoff-salon | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.73	sonoff-inter | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.74	sonoff-verande-s20 | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.80	dht-veranda | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.81	dht-salon | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.100	camipfoscam | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.101	camipwanscamgarage | sudo tee -a /etc/hosts > /dev/null 2>&1
+	echo 192.168.1.102	camipwanscamentree | sudo tee -a /etc/hosts > /dev/null 2>&1	
 	echo 192.168.1.200	monesx | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.210	domotest | sudo tee -a /etc/hosts > /dev/null 2>&1
 	echo 192.168.1.254	openwrt | sudo tee -a /etc/hosts > /dev/null 2>&1
